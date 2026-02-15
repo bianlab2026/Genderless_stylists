@@ -92,46 +92,56 @@ html, body { height: 100%; margin: 0; }
   <style>body { box-sizing: border-box; }</style>
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
  </head>
+	
+	
+	  <!-- 全体背景 -->
  <body class="h-full">
-  <div id="app" class="w-full h-full overflow-auto" style="background: #1a1714; color: #e0d5c1; font-family: 'Zen Kaku Gothic New', sans-serif;"><!-- Header -->
-   <header class="w-full relative overflow-visible" style="background: linear-gradient(135deg, #1a1714 0%, #2a2520 40%, #3a2f28 70%, #1a1714 100%); padding-bottom: 40px;">
-    <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 20% 50%, #e0d5c1 1px, transparent 1px), radial-gradient(circle at 80% 20%, #e0d5c1 1px, transparent 1px); background-size: 60px 60px, 80px 80px;"></div>
-    <div class="relative z-10 text-center pt-8 pb-6 px-4"><!-- Logo Image - positioned higher -->
-     <div class="flex justify-center mb-4">
-      <div class="w-28 h-28 rounded-xl flex items-center justify-center relative z-20" style="background: linear-gradient(135deg, #3a2f28, #5a4a3a); border: 2px solid #c4a87a44; box-shadow: 0 8px 24px rgba(0,0,0,0.5);">
-       <svg width="88" height="88" viewbox="0 0 100 100" fill="none" stroke="#c4a87a" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="50" cy="40" r="15" /> <path d="M 35 58 Q 50 70 65 58" /> <path d="M 30 50 L 70 50" /> <path d="M 32 65 L 35 80 M 68 65 L 65 80" />
-       </svg>
-      </div>
+  <div id="app" class="w-full h-full overflow-auto" style="background: linear-gradient(0deg, #5A92EC 0%, #5A92EC 20%, #494FB7 100%); color: #FFFFFF; font-family: 'Zen Kaku Gothic New', sans-serif;">
+	  
+	  <!-- Header -->
+   <header class="w-full relative overflow-visible">
+  <img 
+    src="https://storage.googleapis.com/studio-design-asset-files/projects/ogO06Y25a2/s-574x292_webp_81a9df05-bfe3-4189-afc7-0dfd211d7632.png" 
+    alt="タイプヘッダー画像"
+    class="w-full max-w-sm h-auto mx-auto mt-6"
+  >
+</header>
+
+   <main class="w-full px-3 pb-8" style="max-width: 640px; margin: 0 auto;">
+	   <!-- Filter Section -->
+    <section class="mt-6">
+		<!-- Genre Filter -->
+     <div class="flex gap-2 mb-3"><button id="btnAll" class="filter-chip active px-4 py-2 rounded-full text-xs font-medium" style="background: #94B7EF; color: #4072C2;"  onclick="setGenre('all')">
+		 All</button> 
+		 
+		 <button id="btnMens" class="filter-chip px-4 py-2 rounded-full text-xs font-medium" style="background: #94B7EF; color: #4072C2;" onclick="setGenre('メンズカット')">
+			 メンズカット</button> 
+		 
+		 <button id="btnChusei" class="filter-chip px-4 py-2 rounded-full text-xs font-medium" style="background: #94B7EF; color: #4072C2;" onclick="setGenre('中性')">
+			 中性 </button>
      </div>
-     <h1 id="siteTitle" class="font-display font-800 tracking-wider" style="font-size: 28px; color: #e0d5c1; letter-spacing: 0.15em;">GENDERLESS HAIR BOOK</h1>
-     <p id="siteSubtitle" class="mt-2 font-body" style="font-size: 13px; color: #a89a87; letter-spacing: 0.1em;">ジェンダーレスヘア美容師図鑑</p>
-     <div class="mt-4 mx-auto" style="width: 40px; height: 2px; background: linear-gradient(90deg, transparent, #c4a87a, transparent);"></div>
-    </div>
-   </header>
-   <main class="w-full px-3 pb-8" style="max-width: 640px; margin: 0 auto;"><!-- Filter Section -->
-    <section class="mt-6"><!-- Genre Filter -->
-     <div class="flex gap-2 mb-3"><button id="btnAll" class="filter-chip active px-4 py-2 rounded-full text-xs font-medium" style="background: #2e2924; color: #e0d5c1; border: 1px solid #3d3530;" onclick="setGenre('all')">All</button> <button id="btnMens" class="filter-chip px-4 py-2 rounded-full text-xs font-medium" style="background: #2e2924; color: #a89a87; border: 1px solid #3d3530;" onclick="setGenre('メンズカット')">メンズカット</button> <button id="btnChusei" class="filter-chip px-4 py-2 rounded-full text-xs font-medium" style="background: #2e2924; color: #a89a87; border: 1px solid #3d3530;" onclick="setGenre('中性')">中性</button>
-     </div><!-- Area Filter -->
-     <div class="relative mb-4"><button id="areaDropdownBtn" class="w-full flex items-center justify-between px-4 py-3 rounded-xl text-xs" style="background: #2e2924; color: #a89a87; border: 1px solid #3d3530;" onclick="toggleAreaDropdown()"> <span id="areaDropdownLabel">エリアを選択</span>
+		
+		<!-- Area Filter -->
+     <div class="relative mb-4"><button id="areaDropdownBtn" class="w-full flex items-center justify-between px-4 py-3 rounded-xl text-xs" style="background: #FFFFFF; color: #4072C2; border: 1px solid #494FB7;" onclick="toggleAreaDropdown()"> <span id="areaDropdownLabel">エリアを選択</span>
        <svg class="w-4 h-4 transition-transform" id="areaArrow" viewbox="0 0 20 20" fill="currentColor">
         <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" />
        </svg></button>
-      <div id="areaDropdown" class="hidden absolute z-30 mt-1 w-full rounded-xl shadow-2xl dropdown-panel" style="background: #2e2924; border: 1px solid #3d3530;">
+      <div id="areaDropdown" class="hidden absolute z-30 mt-1 w-full rounded-xl shadow-2xl dropdown-panel" style="background: #C4DBFF; border: 2px solid #4072C2;">
        <div class="p-3 grid grid-cols-3 gap-1" id="areaGrid"></div>
       </div>
      </div><!-- Active Conditions -->
-     <div id="activeConditions" class="flex flex-wrap gap-1.5 mb-4 min-h-[28px]"><span class="animate-tag inline-flex items-center px-3 py-1 rounded-full text-xs font-medium" style="background: #c4a87a22; color: #c4a87a; border: 1px solid #c4a87a44;">All</span>
+     <div id="activeConditions" class="flex flex-wrap gap-1.5 mb-4 min-h-[28px]"><span class="animate-tag inline-flex items-center px-3 py-1 rounded-full text-xs font-medium" style="background: #FFFFFF; color: #A79DD0; border: 1px solid #FFFFFF;">All</span>
      </div>
     </section><!-- Results Count -->
     <div class="flex items-center justify-between mb-4">
-     <p id="resultCount" class="text-xs" style="color: #a89a87;"></p>
+     <p id="resultCount" class="text-xs" style="color: #A79DD0;"></p>
     </div><!-- Grid -->
     <div id="stylistGrid" class="grid grid-cols-2 gap-3"></div><!-- No results -->
     <div id="noResults" class="hidden text-center py-16">
      <div class="text-4xl mb-3">
       ✂️
      </div>
-     <p class="text-sm" style="color: #a89a87;">条件に一致する美容師が見つかりません</p>
+     <p class="text-sm" style="color: #FFFFFF;">条件に一致する美容師が見つかりません</p>
     </div>
    </main><!-- Modal Overlay -->
    <div id="modalOverlay" class="hidden fixed inset-0 z-50 flex items-end sm:items-center justify-center" style="background: rgba(10,8,6,0.8);" onclick="closeModal(event)">
@@ -289,24 +299,24 @@ function updateGenreUI() {
 
   [btnAll, btnMens, btnChusei].forEach(btn => {
     btn.classList.remove('active');
-    btn.style.color = '#a89a87';
-    btn.style.background = '#2e2924';
+    btn.style.color = '#94B7EF';
+    btn.style.background = '#1C228E';
   });
 
   if (isAll) {
     btnAll.classList.add('active');
-    btnAll.style.color = '#e0d5c1';
-    btnAll.style.background = '#3d3530';
+    btnAll.style.color = '#1C228E';
+    btnAll.style.background = '#FFFFFF';
   }
   if (selectedGenres.includes('メンズカット')) {
     btnMens.classList.add('active');
-    btnMens.style.color = '#e0d5c1';
-    btnMens.style.background = '#3d3530';
+    btnMens.style.color = '#1C228E';
+    btnMens.style.background = '#FFFFFF';
   }
   if (selectedGenres.includes('中性')) {
     btnChusei.classList.add('active');
-    btnChusei.style.color = '#e0d5c1';
-    btnChusei.style.background = '#3d3530';
+    btnChusei.style.color = '#1C228E';
+    btnChusei.style.background = '#FFFFFF';
   }
 }
 
@@ -369,12 +379,12 @@ function renderGrid() {
   }
   noResults.classList.add('hidden');
 
-  // Build new content
+  //一覧カード Build new content
   const frag = document.createDocumentFragment();
   filtered.forEach((s, i) => {
     const card = document.createElement('div');
-    card.className = 'stylist-card rounded-xl overflow-hidden cursor-pointer animate-fade-up';
-    card.style.cssText = `background: #252119; animation-delay: ${i * 0.07}s;`;
+    card.className = 'stylist-card rounded-xl overflow-hidden cursor-pointer animate-fade-up relative';
+    card.style.cssText = `background: #FFFFFF; animation-delay: ${i * 0.07}s;`;
     card.onclick = () => openModal(s);
 
     // Header
@@ -384,9 +394,9 @@ function renderGrid() {
     card.appendChild(header);
 
     // Icon
-    const iconWrap = document.createElement('div');
-    iconWrap.className = 'flex justify-center';
-    iconWrap.style.marginTop = '-22px';
+  const iconWrap = document.createElement('div');
+iconWrap.className = 'absolute left-1/2 -translate-x-1/2';
+iconWrap.style.cssText = 'top: 34px;';
     const icon = document.createElement('div');
     icon.className = 'rounded-full flex items-center justify-center text-xl';
     icon.style.cssText = `width: 44px; height: 44px; background: ${s.iconBg}; border: 3px solid #252119;`;
