@@ -144,11 +144,16 @@ html, body { height: 100%; margin: 0; }
      <p class="text-sm" style="color: #FFFFFF;">条件に一致する美容師が見つかりません</p>
     </div>
    </main><!-- Modal Overlay -->
-   <div id="modalOverlay" class="hidden fixed inset-0 z-50 flex items-end sm:items-center justify-center" style="background: rgba(10,8,6,0.8);" onclick="closeModal(event)">
-    <div id="modalContent" class="w-full overflow-y-auto rounded-t-2xl sm:rounded-2xl" style="max-width: 480px; max-height: 90%; background: #222019;" onclick="event.stopPropagation()"><!-- Modal inner content injected by JS -->
+   <div id="modalOverlay"
+     class="hidden fixed inset-0 z-50 flex items-center justify-center"
+     onclick="closeModal(event)">
+    <div id="modalContent" class="w-full overflow-y-auto rounded-t-2xl sm:rounded-2xl" style="max-width: 480px; max-height: 90%; background: #FFFFFF;" onclick="event.stopPropagation()"><!-- Modal inner content injected by JS -->
     </div>
    </div>
   </div>
+	 
+	 
+	 
   <script>
 // ----- DATA -----
 const PREFECTURES = [
@@ -163,21 +168,33 @@ const PREFECTURES = [
 
 const STYLISTS = [
   {
-    id: 1, name: "RYUKI", genre: ["メンズカット","中性"], area: "東京",
+    id: 1,
+    name: "RYUKI",
+    genre: ["メンズカット","中性"],
+    area: "東京",
     bio: "ジェンダーにとらわれない、あなただけのスタイルを。骨格と雰囲気を活かしたカットが得意です。",
-    headerColor: "#3a2f28", iconBg: "#c4a87a",
+    headerColor: "#3a2f28",
+    headerImage: "images/header1.png", // ←ここ追加
+	iconImage: "images/icon1.png",
+    sns1: "#",
+    sns2: "#"
+  },
+	
+  {
+    id: 2,
+    name: "RYUKI",
+    genre: ["メンズカット"],
+    area: "東京",
+    bio: "ジェンダーにとらわれない、あなただけのスタイルを。骨格と雰囲気を活かしたカットが得意です。",
+    headerColor: "#3a2f28",
+    headerImage: "", // ←ここ追加
+    iconBg: "#c4a87a",
     iconEmoji: "✂️",
     imageBg: "linear-gradient(135deg, #3a2f28, #5a4a3a)",
-    sns1: "#", sns2: "#"
+    sns1: "#",
+    sns2: "#"
   },
-  {
-    id: 2, name: "SORA", genre: ["中性"], area: "大阪",
-    bio: "中性的な魅力を最大限に引き出すヘアデザイン。似合わせに自信があります。",
-    headerColor: "#2a3530", iconBg: "#87b5a0",
-    iconEmoji: "🌿",
-    imageBg: "linear-gradient(135deg, #2a3530, #3a5a4a)",
-    sns1: "#", sns2: "#"
-  },
+	
   {
     id: 3, name: "HARU", genre: ["メンズカット"], area: "福岡",
     bio: "クリーンでモダンなメンズカット専門。フェードからマッシュまで幅広く対応。",
@@ -389,51 +406,77 @@ function renderGrid() {
 
     // Header
     const header = document.createElement('div');
-    header.className = 'w-full relative';
-    header.style.cssText = `height: 56px; background: ${s.headerColor};`;
-    card.appendChild(header);
+header.className = 'w-full relative aspect-[3/1]';
 
-    // Icon
+if (s.headerImage) {
+  const img = document.createElement('img');
+  img.src = s.headerImage;
+  img.className = 'w-full h-full object-cover';
+  img.alt = s.name + ' header';
+  header.appendChild(img);
+} else {
+  header.style.background = s.headerColor;
+}
+
+card.appendChild(header);
+
+
+
+   // Icon
+if (s.iconImage) {
   const iconWrap = document.createElement('div');
-iconWrap.className = 'absolute left-1/2 -translate-x-1/2';
-iconWrap.style.cssText = 'top: 34px;';
-    const icon = document.createElement('div');
-    icon.className = 'rounded-full flex items-center justify-center text-xl';
-    icon.style.cssText = `width: 44px; height: 44px; background: ${s.iconBg}; border: 3px solid #252119;`;
-    icon.textContent = s.iconEmoji;
-    iconWrap.appendChild(icon);
-    card.appendChild(iconWrap);
+  iconWrap.className = 'absolute left-1/2 -translate-x-1/2';
+  iconWrap.style.cssText = 'top: 15px;';
 
-    // Info
+  const icon = document.createElement('div');
+  icon.className = 'rounded-full overflow-hidden';
+  icon.style.cssText = `
+    width: 60px;
+    height: 60px;
+    border: 3px solid #252119;
+  `;
+
+  const img = document.createElement('img');
+  img.src = s.iconImage;
+  img.className = 'w-full h-full object-cover';
+  img.alt = s.name + ' icon';
+
+  icon.appendChild(img);
+  iconWrap.appendChild(icon);
+  card.appendChild(iconWrap);
+}
+
+
+    // プロフィール
     const info = document.createElement('div');
-    info.className = 'px-3 pb-3 pt-2';
-
+    info.className = 'px-3 pb-3 pt-6';
+//名前
     const name = document.createElement('p');
     name.className = 'font-display font-600 text-center text-sm tracking-wide';
-    name.style.color = '#e0d5c1';
+    name.style.color = '#0F0646';
     name.textContent = s.name;
     info.appendChild(name);
-
+//ジャンル
     const tags = document.createElement('div');
     tags.className = 'flex flex-wrap gap-1 justify-center mt-1.5';
     s.genre.forEach(g => {
       const t = document.createElement('span');
       t.className = 'text-xs px-2 py-0.5 rounded-full';
-      t.style.cssText = 'background: #c4a87a22; color: #c4a87a; font-size: 10px;';
+      t.style.cssText = 'background: #EEF4FF; color: #494FB7; font-size: 10px;';
       t.textContent = g;
       tags.appendChild(t);
     });
     info.appendChild(tags);
-
+//エリア
     const area = document.createElement('p');
     area.className = 'text-center mt-1';
     area.style.cssText = 'font-size: 10px; color: #a89a87;';
     area.textContent = `📍 ${s.area}`;
     info.appendChild(area);
-
+//bio
     const bio = document.createElement('p');
     bio.className = 'mt-2 leading-relaxed';
-    bio.style.cssText = 'font-size: 10px; color: #8a7d6e; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;';
+    bio.style.cssText = 'font-size: 10px; color: #0F0646; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;';
     bio.textContent = s.bio;
     info.appendChild(bio);
 
@@ -455,25 +498,62 @@ function openModal(s) {
   const overlay = document.getElementById('modalOverlay');
   const content = document.getElementById('modalContent');
 
-  content.innerHTML = `
-    <!-- Header -->
-    <div class="relative" style="height: 100px; background: ${s.headerColor};">
-      <button onclick="closeModal()" class="absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center" style="background: rgba(0,0,0,0.4); color: #e0d5c1; font-size: 18px; backdrop-filter: blur(4px);">&times;</button>
+content.innerHTML = `
+  <!-- Header -->
+  <div class="relative" style="
+    height: 120px;
+    background-image: url('${s.headerImage}');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  ">
+    <button onclick="closeModal()" 
+      class="absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center"
+      style="background: rgba(0,0,0,0.4); color: #e0d5c1; font-size: 18px; backdrop-filter: blur(4px);">
+      &times;
+    </button>
+
+
+    <!-- Icon（ヘッダーの中に入れる） -->
+    <div style="
+      position: absolute;
+      left: 50%;
+      bottom: -32px;
+      transform: translateX(-50%);
+    ">
+      <img src="${s.iconImage}"
+        style="
+          width: 64px;
+          height: 64px;
+          object-fit: cover;
+          border-radius: 50%;
+          border: 4px solid #222019;
+        ">
     </div>
-    <!-- Icon -->
-    <div class="flex justify-center" style="margin-top: -32px;">
-      <div class="rounded-full flex items-center justify-center text-3xl" style="width: 64px; height: 64px; background: ${s.iconBg}; border: 4px solid #222019;">
-        ${s.iconEmoji}
-      </div>
+  </div>
+
+   <!-- Info -->
+  <div class="px-5 pb-6 pt-12">
+    <h2 class="font-display font-700 text-center text-xl tracking-wider" style="color: #e0d5c1;">
+      ${s.name}
+    </h2>
+
+    <div class="flex flex-wrap gap-1.5 justify-center mt-2">
+      ${s.genre.map(g => `
+        <span class="text-xs px-3 py-1 rounded-full"
+          style="background: #c4a87a22; color: #c4a87a;">
+          ${g}
+        </span>
+      `).join('')}
     </div>
-    <!-- Info -->
-    <div class="px-5 pb-6 pt-3">
-      <h2 class="font-display font-700 text-center text-xl tracking-wider" style="color: #e0d5c1;">${s.name}</h2>
-      <div class="flex flex-wrap gap-1.5 justify-center mt-2">
-        ${s.genre.map(g => `<span class="text-xs px-3 py-1 rounded-full" style="background: #c4a87a22; color: #c4a87a;">${g}</span>`).join('')}
-      </div>
-      <p class="text-center mt-2 text-xs" style="color: #a89a87;">📍 ${s.area}</p>
-      <p class="mt-4 text-sm leading-relaxed" style="color: #b0a494;">${s.bio}</p>
+
+    <p class="text-center mt-2 text-xs" style="color: #a89a87;">
+      📍 ${s.area}
+    </p>
+
+    <p class="mt-4 text-sm leading-relaxed" style="color: #b0a494;">
+      ${s.bio}
+    </p>
 
       <!-- Image placeholder -->
       <div class="mt-5 rounded-xl overflow-hidden" style="height: 180px; background: ${s.imageBg};">
@@ -501,6 +581,7 @@ function openModal(s) {
             <circle cx="12" cy="12" r="5"/>
             <circle cx="17.5" cy="6.5" r="1.5" fill="#e0d5c1" stroke="none"/>
           </svg>
+
         </a>
       </div>
     </div>
