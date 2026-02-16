@@ -96,14 +96,14 @@ html, body { height: 100%; margin: 0; }
 	
 	  <!-- 全体背景 -->
  <body class="h-full">
-  <div id="app" class="w-full h-full overflow-auto" style="background: linear-gradient(0deg, #5A92EC 0%, #5A92EC 20%, #494FB7 100%); color: #FFFFFF; font-family: 'Zen Kaku Gothic New', sans-serif;">
+  <div id="app" class="w-full h-full overflow-auto" style="background: linear-gradient(0deg, #E8EDFF 0%, #E8EDFF 50%, #494FB7 80%); color: #FFFFFF; font-family: 'Zen Kaku Gothic New', sans-serif;">
 	  
 	  <!-- Header -->
    <header class="w-full relative overflow-visible">
   <img 
     src="https://storage.googleapis.com/studio-design-asset-files/projects/ogO06Y25a2/s-574x292_webp_81a9df05-bfe3-4189-afc7-0dfd211d7632.png" 
     alt="タイプヘッダー画像"
-    class="w-full max-w-sm h-auto mx-auto mt-6"
+    class="w-full max-w-xs h-auto mx-auto mt-4"
   >
 </header>
 
@@ -111,7 +111,7 @@ html, body { height: 100%; margin: 0; }
 	   <!-- Filter Section -->
     <section class="mt-6">
 		<!-- Genre Filter -->
-     <div class="flex gap-2 mb-3"><button id="btnAll" class="filter-chip active px-4 py-2 rounded-full text-xs font-medium" style="background: #94B7EF; color: #4072C2;"  onclick="setGenre('all')">
+     <div class="flex gap-2 mb-3"><button id="btnAll" class="filter-chip active px-4 py-2 rounded-full text-xs font-medium" style="background: #FF67CD; color: #FFFFFF;"  onclick="setGenre('all')">
 		 All</button> 
 		 
 		 <button id="btnMens" class="filter-chip px-4 py-2 rounded-full text-xs font-medium" style="background: #94B7EF; color: #4072C2;" onclick="setGenre('メンズカット')">
@@ -126,7 +126,7 @@ html, body { height: 100%; margin: 0; }
        <svg class="w-4 h-4 transition-transform" id="areaArrow" viewbox="0 0 20 20" fill="currentColor">
         <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" />
        </svg></button>
-      <div id="areaDropdown" class="hidden absolute z-30 mt-1 w-full rounded-xl shadow-2xl dropdown-panel" style="background: #C4DBFF; border: 2px solid #4072C2;">
+      <div id="areaDropdown" class="hidden absolute z-30 mt-1 w-full rounded-xl shadow-2xl dropdown-panel" style="background: #C4DBFF; border: 1px solid #4072C2;">
        <div class="p-3 grid grid-cols-3 gap-1" id="areaGrid"></div>
       </div>
      </div><!-- Active Conditions -->
@@ -134,14 +134,14 @@ html, body { height: 100%; margin: 0; }
      </div>
     </section><!-- Results Count -->
     <div class="flex items-center justify-between mb-4">
-     <p id="resultCount" class="text-xs" style="color: #A79DD0;"></p>
+     <p id="resultCount" class="text-xs" style="color: #272729;"></p>
     </div><!-- Grid -->
     <div id="stylistGrid" class="grid grid-cols-2 gap-3"></div><!-- No results -->
     <div id="noResults" class="hidden text-center py-16">
      <div class="text-4xl mb-3">
       ✂️
      </div>
-     <p class="text-sm" style="color: #FFFFFF;">条件に一致する美容師が見つかりません</p>
+     <p class="text-sm" style="color: #272729;">条件に一致する美容師が見つかりません</p>
     </div>
    </main><!-- Modal Overlay -->
    <div id="modalOverlay"
@@ -173,27 +173,24 @@ const STYLISTS = [
     genre: ["メンズカット","中性"],
     area: "東京",
     bio: "ジェンダーにとらわれない、あなただけのスタイルを。骨格と雰囲気を活かしたカットが得意です。",
-    headerColor: "#3a2f28",
     headerImage: "images/header1.png", // ←ここ追加
 	iconImage: "images/icon1.png",
     sns1: "#",
     sns2: "#"
   },
 	
-  {
+   {
     id: 2,
-    name: "RYUKI",
-    genre: ["メンズカット"],
+    name: "AOI",
+    genre: ["メンズカット","中性"],
     area: "東京",
     bio: "ジェンダーにとらわれない、あなただけのスタイルを。骨格と雰囲気を活かしたカットが得意です。",
-    headerColor: "#3a2f28",
-    headerImage: "", // ←ここ追加
-    iconBg: "#c4a87a",
-    iconEmoji: "✂️",
-    imageBg: "linear-gradient(135deg, #3a2f28, #5a4a3a)",
+    headerImage: "images/header1.png", // ←ここ追加
+	iconImage: "images/icon1.png",
     sns1: "#",
     sns2: "#"
   },
+	
 	
   {
     id: 3, name: "HARU", genre: ["メンズカット"], area: "福岡",
@@ -433,7 +430,7 @@ if (s.iconImage) {
   icon.style.cssText = `
     width: 60px;
     height: 60px;
-    border: 3px solid #252119;
+    border: 3px solid #FFFFFF;
   `;
 
   const img = document.createElement('img');
@@ -462,7 +459,7 @@ if (s.iconImage) {
     s.genre.forEach(g => {
       const t = document.createElement('span');
       t.className = 'text-xs px-2 py-0.5 rounded-full';
-      t.style.cssText = 'background: #EEF4FF; color: #494FB7; font-size: 10px;';
+      t.style.cssText = 'background: #7577A3; color: #FFFFFF; font-size: 8px;';
       t.textContent = g;
       tags.appendChild(t);
     });
@@ -470,13 +467,13 @@ if (s.iconImage) {
 //エリア
     const area = document.createElement('p');
     area.className = 'text-center mt-1';
-    area.style.cssText = 'font-size: 10px; color: #a89a87;';
+    area.style.cssText = 'font-size: 10px; color: #9797A0;';
     area.textContent = `📍 ${s.area}`;
     info.appendChild(area);
 //bio
     const bio = document.createElement('p');
     bio.className = 'mt-2 leading-relaxed';
-    bio.style.cssText = 'font-size: 10px; color: #0F0646; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;';
+    bio.style.cssText = 'font-size: 9px; color: #272729; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;';
     bio.textContent = s.bio;
     info.appendChild(bio);
 
@@ -527,31 +524,31 @@ content.innerHTML = `
           height: 64px;
           object-fit: cover;
           border-radius: 50%;
-          border: 4px solid #222019;
+          border: 4px solid #FFFFFF;
         ">
     </div>
   </div>
 
-   <!-- Info -->
+   <!-- modal内のInfo -->
   <div class="px-5 pb-6 pt-12">
-    <h2 class="font-display font-700 text-center text-xl tracking-wider" style="color: #e0d5c1;">
+    <h2 class="font-display font-700 text-center text-xl tracking-wider" style="color: #0F0646;">
       ${s.name}
     </h2>
 
     <div class="flex flex-wrap gap-1.5 justify-center mt-2">
       ${s.genre.map(g => `
         <span class="text-xs px-3 py-1 rounded-full"
-          style="background: #c4a87a22; color: #c4a87a;">
+          style="background: #7577A3; color: #FFFFFF;">
           ${g}
         </span>
       `).join('')}
     </div>
 
-    <p class="text-center mt-2 text-xs" style="color: #a89a87;">
+    <p class="text-center mt-2 text-xs" style="color: #9797A0;">
       📍 ${s.area}
     </p>
 
-    <p class="mt-4 text-sm leading-relaxed" style="color: #b0a494;">
+    <p class="mt-4 text-sm leading-relaxed" style="color: #272729;">
       ${s.bio}
     </p>
 
@@ -566,17 +563,34 @@ content.innerHTML = `
         </div>
       </div>
 
+
       <!-- SNS Buttons -->
       <div class="flex justify-center gap-4 mt-5">
-        <a href="${s.sns1}" target="_blank" rel="noopener noreferrer" class="sns-btn w-12 h-12 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, #3a3530, #4a4035); border: 1px solid #5a5040;">
+        <a href="${s.sns1}" target="_blank" rel="noopener noreferrer"
+class="sns-btn w-12 h-12 rounded-full flex items-center justify-center"
+style="
+  background: linear-gradient(135deg, #5C57B2, #2A2B53);
+  border: 1px solid #FFFFFF;
+  box-shadow: 0 5px 5px rgba(42, 43, 83, 0.4);
+"
+
           <!-- TikTok placeholder -->
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e0d5c1" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/>
           </svg>
         </a>
-        <a href="${s.sns2}" target="_blank" rel="noopener noreferrer" class="sns-btn w-12 h-12 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, #3a3530, #4a4035); border: 1px solid #5a5040;">
+
+
+        <a href="${s.sns2}" target="_blank" rel="noopener noreferrer" 
+class="sns-btn w-12 h-12 rounded-full flex items-center justify-center"
+style="
+  background: linear-gradient(135deg, #5C57B2, #2A2B53);
+  border: 1px solid #FFFFFF;
+  box-shadow: 0 5px 5px rgba(42, 43, 83, 0.4);
+"
+
           <!-- Instagram placeholder -->
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e0d5c1" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
             <circle cx="12" cy="12" r="5"/>
             <circle cx="17.5" cy="6.5" r="1.5" fill="#e0d5c1" stroke="none"/>
