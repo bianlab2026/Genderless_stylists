@@ -84,6 +84,8 @@ html, body { height: 100%; margin: 0; }
 /* SNS button pulse */
 .sns-btn {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+	box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+
 }
 .sns-btn:hover {
   transform: scale(1.12);
@@ -254,7 +256,7 @@ html, body { height: 100%; margin: 0; }
    <div id="modalOverlay"
      class="hidden fixed inset-0 z-50 flex items-center justify-center"
      onclick="closeModal(event)">
-    <div id="modalContent" class="w-full overflow-y-auto rounded-t-2xl sm:rounded-2xl" style="max-width: 480px; max-height: 90%; background: #FFFFFF;" onclick="event.stopPropagation()"><!-- Modal inner content injected by JS -->
+    <div id="modalContent" class="w-full overflow-y-auto rounded-t-2xl sm:rounded-2xl" style="max-width: 480px; max-height: 90%; background: #FFFFFF; box-shadow: 0 4px 12px rgba(0,0,0,0.35);" onclick="event.stopPropagation()"><!-- Modal inner content injected by JS -->
     </div>
    </div>
   </div>
@@ -282,6 +284,7 @@ const STYLISTS = [
     bio: "ジェンダーにとらわれない、あなただけのスタイルを。骨格と雰囲気を活かしたカットが得意です。",
     headerImage: "images/header1.png", // ←ここ追加
 	iconImage: "images/icon1.png",
+	mainImage: "images/main1.png",
     sns1: "#",
     sns2: "#"
   },
@@ -658,28 +661,16 @@ content.innerHTML = `
     </button>
 
 
-    <!-- Icon（ヘッダーの中に入れる） -->
-    <div style="
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -32px;
-  padding: 0 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-">
-    
-	    <img src="${s.iconImage}"
-    style="
-      width: 90px;
-      height: 90px;
-      object-fit: cover;
-      border-radius: 50%;
-      border: 4px solid #FFFFFF;
-    ">
+   
 
-  <div class="flex gap-3">
+  <div style="
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  display: flex;
+  gap: 10px;
+">
+
     <a href="${s.sns1}" target="_blank" rel="noopener noreferrer"
       class="sns-btn w-10 h-10 rounded-full flex items-center justify-center"
       style="
@@ -707,42 +698,91 @@ content.innerHTML = `
     </a>
   </div>
 
-	  </div>
+<img src="${s.iconImage}"
+     style="
+       width:90px;
+       height:90px;
+       object-fit:cover;
+       border-radius:50%;
+       border:3px solid #fff;
+       position:absolute;
+       left:20px;
+       bottom:-42px;
+     ">
+
+
   </div>
 
    <!-- modal内のInfo -->
-  <div class="px-5 pb-6 pt-20">
-    <h2 class="font-display font-700 text-center text-xl tracking-wider" style="color: #0F0646;">
-      ${s.name}
-    </h2>
+ <div class="px-5 pb-6 pt-10">
+   <!-- Icon --
+<img src="${s.iconImage}"
+     style="
+       width:84px;
+       height:84px;
+       object-fit:cover;
+       border-radius:50%;
+       border:3px solid #fff;
+       display:block;
+       box-shadow:0 6px 18px rgba(0,0,0,0.25);
+     ">
 
-    <div class="flex flex-wrap gap-1.5 justify-center mt-2">
-      ${s.genre.map(g => `
-        <span class="text-xs px-3 py-1 rounded-full"
-          style="background: #7577A3; color: #FFFFFF;">
-          ${g}
-        </span>
-      `).join('')}
-    </div>
 
-    <p class="text-center mt-2 text-xs" style="color: #9797A0;">
-      📍 ${s.area}
-    </p>
+<!-- Name -->
+<h2 class="font-display font-700 text-xl tracking-wider"
+    style="color:#0F0646; margin-top:14px;">
+  ${s.name}
+</h2>
 
-    <p class="mt-4 text-sm leading-relaxed" style="color: #272729;">
-      ${s.bio}
-    </p>
+<!-- Area -->
+<p style="color:#9797A0; font-size:13px; margin-top:4px;">
+  📍 ${s.area}
+</p>
 
-      <!-- Image placeholder -->
-      <div class="mt-5 rounded-xl overflow-hidden" style="height: 180px; background: ${s.imageBg};">
-        <div class="w-full h-full flex items-center justify-center" style="color: #a89a8755;">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-            <circle cx="8.5" cy="8.5" r="1.5"/>
-            <path d="M21 15l-5-5L5 21"/>
-          </svg>
-        </div>
-      </div>
+<!-- Genre -->
+<div style="display:flex; flex-wrap:wrap; gap:6px; margin-top:10px;">
+  ${s.genre.map(g => `
+    <span style="
+      font-size:11px;
+      padding:4px 10px;
+      border-radius:999px;
+      background:#7577A3;
+      color:#fff;
+    ">
+      ${g}
+    </span>
+  `).join('')}
+</div>
+
+
+<!-- bio -->
+<p style="
+  margin-top:14px;
+  font-size:14px;
+  line-height:1.6;
+  color:#4B4B63;
+">
+  ${s.bio.replace(/\n/g, "<br>")}
+</p>
+
+
+
+<!-- Main Image -->
+<div style="
+  margin-top:20px;
+  aspect-ratio:1/1;
+  overflow:hidden;
+  border-radius:16px;
+">
+  <img src="${s.mainImage}"
+       style="
+         width:100%;
+         height:100%;
+         object-fit:cover;
+         display:block;
+       ">
+</div>
+
 
   `;
 
