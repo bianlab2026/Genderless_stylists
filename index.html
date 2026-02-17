@@ -96,7 +96,7 @@ html, body { height: 100%; margin: 0; }
 	
 	  <!-- 全体背景 -->
  <body class="h-full">
-  <div id="app" class="w-full h-full overflow-auto" style="background: linear-gradient(0deg, #E8EDFF 0%, #E8EDFF 50%, #494FB7 80%); color: #FFFFFF; font-family: 'Zen Kaku Gothic New', sans-serif;">
+  <div id="app" class="w-full h-full overflow-auto" style="background: linear-gradient(0deg, #FFFFFF 0%, #E8EDFF 50%, #bcd8ff 80%); color: #FFFFFF; font-family: 'Zen Kaku Gothic New', sans-serif;">
 	  
 	  <!-- Header -->
    <header class="w-full relative overflow-visible">
@@ -108,10 +108,12 @@ html, body { height: 100%; margin: 0; }
 </header>
 
    <main class="w-full px-3 pb-8" style="max-width: 640px; margin: 0 auto;">
+
+
 	   <!-- Filter Section -->
     <section class="mt-6">
 		<!-- Genre Filter -->
-     <div class="flex gap-2 mb-3"><button id="btnAll" class="filter-chip active px-4 py-2 rounded-full text-xs font-medium" style="background: #FF67CD; color: #FFFFFF;"  onclick="setGenre('all')">
+     <div class="flex gap-2 mb-3"><button id="btnAll" class="filter-chip active px-4 py-2 rounded-full text-xs font-medium" style="background: #94B7EF; color: #4072C2;"  onclick="setGenre('all')">
 		 All</button> 
 		 
 		 <button id="btnMens" class="filter-chip px-4 py-2 rounded-full text-xs font-medium" style="background: #94B7EF; color: #4072C2;" onclick="setGenre('メンズカット')">
@@ -120,30 +122,52 @@ html, body { height: 100%; margin: 0; }
 		 <button id="btnChusei" class="filter-chip px-4 py-2 rounded-full text-xs font-medium" style="background: #94B7EF; color: #4072C2;" onclick="setGenre('中性')">
 			 中性 </button>
      </div>
+
+
 		
 		<!-- Area Filter -->
-     <div class="relative mb-4"><button id="areaDropdownBtn" class="w-full flex items-center justify-between px-4 py-3 rounded-xl text-xs" style="background: #FFFFFF; color: #4072C2; border: 1px solid #494FB7;" onclick="toggleAreaDropdown()"> <span id="areaDropdownLabel">エリアを選択</span>
+     <div class="relative mb-4">
+
+<button id="areaDropdownBtn" class="w-full flex items-center justify-between px-4 py-3 rounded-xl text-xs" style="background: #FFFFFF; color: #4072C2; border: 1px solid #494FB7;" onclick="toggleAreaDropdown()">
+ <span id="areaDropdownLabel">エリアを選択</span>
        <svg class="w-4 h-4 transition-transform" id="areaArrow" viewbox="0 0 20 20" fill="currentColor">
         <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" />
        </svg></button>
+
       <div id="areaDropdown" class="hidden absolute z-30 mt-1 w-full rounded-xl shadow-2xl dropdown-panel" style="background: #C4DBFF; border: 1px solid #4072C2;">
        <div class="p-3 grid grid-cols-3 gap-1" id="areaGrid"></div>
       </div>
-     </div><!-- Active Conditions -->
-     <div id="activeConditions" class="flex flex-wrap gap-1.5 mb-4 min-h-[28px]"><span class="animate-tag inline-flex items-center px-3 py-1 rounded-full text-xs font-medium" style="background: #FFFFFF; color: #A79DD0; border: 1px solid #FFFFFF;">All</span>
      </div>
-    </section><!-- Results Count -->
+
+
+<!-- Active Conditions -->
+     <div id="activeConditions" class="flex flex-wrap gap-1.5 mb-4 min-h-[28px]"><span class="animate-tag inline-flex items-center px-3 py-1 rounded-full text-xs font-medium" style="background: #FFFFFF; color: #A79DD0;">All</span>
+     </div>
+    </section>
+
+
+<!-- Results Count -->
     <div class="flex items-center justify-between mb-4">
      <p id="resultCount" class="text-xs" style="color: #272729;"></p>
     </div><!-- Grid -->
-    <div id="stylistGrid" class="grid grid-cols-2 gap-3"></div><!-- No results -->
+    <div id="stylistGrid" class="grid grid-cols-2 gap-3">
+</div>
+
+
+<!-- No results -->
     <div id="noResults" class="hidden text-center py-16">
      <div class="text-4xl mb-3">
       ✂️
      </div>
      <p class="text-sm" style="color: #272729;">条件に一致する美容師が見つかりません</p>
     </div>
-   </main><!-- Modal Overlay -->
+
+
+   </main>
+
+
+
+<!-- Modal Overlay -->
    <div id="modalOverlay"
      class="hidden fixed inset-0 z-50 flex items-center justify-center"
      onclick="closeModal(event)">
