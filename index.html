@@ -58,8 +58,9 @@ html, body { height: 100%; margin: 0; }
 }
 .stylist-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 28px rgba(0,0,0,0.35);
+  box-shadow: 0 10px 22px rgba(64,114,194,0.18);
 }
+
 
 /* Filter chip */
 .filter-chip {
@@ -88,6 +89,61 @@ html, body { height: 100%; margin: 0; }
   transform: scale(1.12);
   box-shadow: 0 4px 16px rgba(0,0,0,0.4);
 }
+
+/* 検索UI */
+.filter-chip {
+  padding: 8px 16px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 600;
+  background: #E8EDFF;
+  color: #4072C2;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.filter-chip:hover {
+  background: #D6E4FF;
+}
+
+.filter-chip.active {
+  background: #4072C2;
+  color: #FFFFFF;
+  box-shadow: 0 4px 10px rgba(64,114,194,0.35);
+}
+
+
+.area-btn {
+  background: #FFFFFF;
+  color: #4072C2;
+  border: 1px solid #4072C2;
+  transition: all 0.2s ease;
+}
+
+.area-btn.active {
+  background: #E8EDFF;
+  border: 1px solid #4072C2;
+  box-shadow: 0 4px 10px rgba(64,114,194,0.25);
+}
+
+/* 未選択 → グレー ホバー → ふわ青 選択 → しっかり青 */
+.area-item {
+  color: #6B7280;
+  background: transparent;
+}
+
+.area-item:hover {
+  background: #E8EDFF;
+  color: #4072C2;
+}
+
+.area-item.active {
+  background: #4072C2;
+  color: #FFFFFF;
+}
+
+
+
 </style>
   <style>body { box-sizing: border-box; }</style>
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
@@ -95,15 +151,15 @@ html, body { height: 100%; margin: 0; }
 	
 	
 	  <!-- 全体背景 -->
- <body class="h-full">
-  <div id="app" class="w-full h-full overflow-auto" style="background: linear-gradient(0deg, #FFFFFF 0%, #E8EDFF 50%, #bcd8ff 80%); color: #FFFFFF; font-family: 'Zen Kaku Gothic New', sans-serif;">
+<body class="min-h-screen m-0">
+  <div id="app" class="w-full min-h-screen" style="background: linear-gradient(0deg, #FFFFFF 0%, #E8EDFF 50%, #bcd8ff 80%); color: #FFFFFF; font-family: 'Zen Kaku Gothic New', sans-serif;">
 	  
 	  <!-- Header -->
-   <header class="w-full relative overflow-visible">
+   <header class="w-full relative overflow-visible pt-6">
   <img 
     src="https://storage.googleapis.com/studio-design-asset-files/projects/ogO06Y25a2/s-574x292_webp_81a9df05-bfe3-4189-afc7-0dfd211d7632.png" 
     alt="タイプヘッダー画像"
-    class="w-full max-w-xs h-auto mx-auto mt-4"
+    class="w-full max-w-xs h-auto mx-auto"
   >
 </header>
 
@@ -111,30 +167,54 @@ html, body { height: 100%; margin: 0; }
 
 
 	   <!-- Filter Section -->
-    <section class="mt-6">
+    <section id="filterCard"
+  class="mt-6 p-5 rounded-2xl relative z-50"
+  style="
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(64,114,194,0.2);
+  ">
+
+<h2 class="text-sm font-bold mb-4" style="color:#1C228E;">
+  絞り込み
+</h2>
+
 		<!-- Genre Filter -->
-     <div class="flex gap-2 mb-3"><button id="btnAll" class="filter-chip active px-4 py-2 rounded-full text-xs font-medium" style="background: #94B7EF; color: #4072C2;"  onclick="setGenre('all')">
+     <div class="mb-4">
+  <p class="text-xs font-semibold mb-2" style="color:#1C228E;">ジャンル</p>
+  <div class="flex gap-2">
+
+<button id="btnAll" class="filter-chip active px-4 py-2 rounded-full text-xs font-medium" onclick="setGenre('all')">
 		 All</button> 
 		 
-		 <button id="btnMens" class="filter-chip px-4 py-2 rounded-full text-xs font-medium" style="background: #94B7EF; color: #4072C2;" onclick="setGenre('メンズカット')">
+		 <button id="btnMens" class="filter-chip px-4 py-2 rounded-full text-xs font-medium" onclick="setGenre('メンズカット')">
 			 メンズカット</button> 
 		 
-		 <button id="btnChusei" class="filter-chip px-4 py-2 rounded-full text-xs font-medium" style="background: #94B7EF; color: #4072C2;" onclick="setGenre('中性')">
+		 <button id="btnChusei" class="filter-chip px-4 py-2 rounded-full text-xs font-medium" onclick="setGenre('中性')">
 			 中性 </button>
      </div>
+</div>
 
 
 		
 		<!-- Area Filter -->
+<p class="text-xs font-semibold mb-2" style="color:#1C228E;">エリア</p>
+
      <div class="relative mb-4">
 
-<button id="areaDropdownBtn" class="w-full flex items-center justify-between px-4 py-3 rounded-xl text-xs" style="background: #FFFFFF; color: #4072C2; border: 1px solid #494FB7;" onclick="toggleAreaDropdown()">
- <span id="areaDropdownLabel">エリアを選択</span>
-       <svg class="w-4 h-4 transition-transform" id="areaArrow" viewbox="0 0 20 20" fill="currentColor">
-        <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" />
-       </svg></button>
+<button id="areaDropdownBtn"
+  onclick="toggleAreaDropdown()"
+  class="area-btn w-full flex items-center justify-between px-4 py-3 rounded-xl text-xs">
 
-      <div id="areaDropdown" class="hidden absolute z-30 mt-1 w-full rounded-xl shadow-2xl dropdown-panel" style="background: #C4DBFF; border: 1px solid #4072C2;">
+  <span id="areaDropdownLabel">エリアを選択</span>
+  <svg class="w-4 h-4 transition-transform" id="areaArrow" viewBox="0 0 20 20" fill="currentColor">
+    <path fill-rule="evenodd"
+      d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" />
+  </svg>
+</button>
+
+
+      <div id="areaDropdown" class="hidden absolute z-[999] mt-1 w-full rounded-xl shadow-2xl dropdown-panel" style="background: #C4DBFF; border: 1px solid #4072C2;">
        <div class="p-3 grid grid-cols-3 gap-1" id="areaGrid"></div>
       </div>
      </div>
@@ -150,7 +230,9 @@ html, body { height: 100%; margin: 0; }
     <div class="flex items-center justify-between mb-4">
      <p id="resultCount" class="text-xs" style="color: #272729;"></p>
     </div><!-- Grid -->
-    <div id="stylistGrid" class="grid grid-cols-2 gap-3">
+    <div id="stylistGrid"
+  class="grid grid-cols-2 gap-3 relative z-0">
+
 </div>
 
 
@@ -261,7 +343,6 @@ function initAreaGrid() {
   PREFECTURES.forEach(pref => {
     const btn = document.createElement('button');
     btn.className = 'area-item text-xs py-1.5 px-1 rounded-lg text-center transition-all';
-    btn.style.cssText = 'color: #a89a87; background: transparent;';
     btn.dataset.pref = pref;
     btn.textContent = pref;
     btn.onclick = (e) => { e.stopPropagation(); toggleArea(pref); };
@@ -293,26 +374,35 @@ document.addEventListener('click', (e) => {
 
 function toggleArea(pref) {
   const idx = selectedAreas.indexOf(pref);
-  if (idx > -1) { selectedAreas.splice(idx, 1); }
-  else { selectedAreas.push(pref); }
+
+  if (idx > -1) {
+    selectedAreas.splice(idx, 1);
+  } else {
+    selectedAreas.push(pref);
+  }
+
   updateAreaUI();
   renderAll();
 }
 
+
+
 function updateAreaUI() {
   document.querySelectorAll('.area-item').forEach(btn => {
     const active = selectedAreas.includes(btn.dataset.pref);
-    btn.style.background = active ? '#c4a87a33' : 'transparent';
-    btn.style.color = active ? '#c4a87a' : '#a89a87';
-    btn.style.border = active ? '1px solid #c4a87a66' : '1px solid transparent';
+    btn.classList.toggle('active', active);
   });
+
   const label = document.getElementById('areaDropdownLabel');
+
   if (selectedAreas.length === 0) {
     label.textContent = 'エリアを選択';
   } else if (selectedAreas.length <= 3) {
     label.textContent = selectedAreas.join('・');
   } else {
-    label.textContent = selectedAreas.slice(0,3).join('・') + ` 他${selectedAreas.length - 3}件`;
+    label.textContent =
+      selectedAreas.slice(0,3).join('・') +
+      ` 他${selectedAreas.length - 3}件`;
   }
 }
 
@@ -322,12 +412,18 @@ function setGenre(genre) {
     selectedGenres = [];
   } else {
     const idx = selectedGenres.indexOf(genre);
-    if (idx > -1) { selectedGenres.splice(idx, 1); }
-    else { selectedGenres.push(genre); }
+    if (idx > -1) {
+      selectedGenres.splice(idx, 1);
+    } else {
+      selectedGenres.push(genre);
+    }
   }
+
   updateGenreUI();
   renderAll();
 }
+
+
 
 function updateGenreUI() {
   const btnAll = document.getElementById('btnAll');
@@ -386,16 +482,35 @@ function renderActiveConditions() {
   });
 }
 
+// -----選択中の条件スタイル -----
 function createConditionTag(text, onRemove) {
   const span = document.createElement('span');
   span.className = 'animate-tag inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium';
-  span.style.cssText = 'background: #c4a87a22; color: #c4a87a; border: 1px solid #c4a87a44;';
+  span.style.cssText = `
+  background: #EDE9FE;
+  color: #5B21B6;
+  border: 1px solid #C4B5FD;
+`;
+
   span.textContent = text;
   if (onRemove) {
     const x = document.createElement('button');
     x.innerHTML = '&times;';
-    x.className = 'ml-0.5 leading-none';
-    x.style.cssText = 'font-size: 14px; color: #c4a87a; opacity: 0.7;';
+  x.className = 'ml-1 flex items-center justify-center';
+
+x.style.cssText = `
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #5B21B6;
+  color: #FFFFFF;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+`;
+
     x.onclick = (e) => { e.stopPropagation(); onRemove(); };
     span.appendChild(x);
   }
@@ -421,8 +536,15 @@ function renderGrid() {
   const frag = document.createDocumentFragment();
   filtered.forEach((s, i) => {
     const card = document.createElement('div');
-    card.className = 'stylist-card rounded-xl overflow-hidden cursor-pointer animate-fade-up relative';
-    card.style.cssText = `background: #FFFFFF; animation-delay: ${i * 0.07}s;`;
+    card.className = 'stylist-card rounded-2xl overflow-hidden cursor-pointer animate-fade-up relative';
+    card.style.cssText = `
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(6px);
+-webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(64,114,194,0.15);
+  animation-delay: ${i * 0.07}s;
+`;
+
     card.onclick = () => openModal(s);
 
     // Header
@@ -483,7 +605,7 @@ if (s.iconImage) {
     s.genre.forEach(g => {
       const t = document.createElement('span');
       t.className = 'text-xs px-2 py-0.5 rounded-full';
-      t.style.cssText = 'background: #7577A3; color: #FFFFFF; font-size: 8px;';
+      t.style.cssText = 'background: #E0E7FF; color: #3730A3; font-size: 8px;';
       t.textContent = g;
       tags.appendChild(t);
     });
