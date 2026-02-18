@@ -286,9 +286,10 @@ const STYLISTS = [
     genre: ["メンズカット"],
     area: "大阪",
     bio: "大阪でカッコよくなりたい、メンズスタイルをやりたい女性は全てお任せあれ！！！",
-    headerImage: "https://storage.googleapis.com/studio-design-asset-files/projects/ogO06Y25a2/s-1010x513_v-fs_webp_3cabbf68-ad0d-43ea-8423-9703a1d2bbfe.png", 
-	iconImage: "images/fujiwarasayu2.jpeg",
-	mainImage: "images/fujiwarasayu3.jpeg",
+    headerImage: "images/fujiwarasayu3.jpeg", 
+    iconImage: "images/fujiwarasayu2.jpeg",
+    mainImage: "images/fujiwarasayu3.jpeg",
+
     sns1: "https://www.tiktok.com/@fdj207495725?_r=1&_t=ZS-940ItnfM8tW",
     sns2: "https://www.instagram.com/fujiwara_sayu?igsh=MTg1YWE0aGE3eDBrYg%3D%3D&utm_source=qr",
 	sns3:"https://youtube.com/@fujiwara_sayu?si=6UtBmn9T9wIWICxV"
@@ -670,70 +671,81 @@ content.innerHTML = `
 
    
 
-  <div style="
+ <div style="
   position: absolute;
   right: 16px;
-  bottom: 16px;
+  bottom: -45px;
   display: flex;
-  gap: 10px;
+  gap: 12px;
 ">
+ ${s.sns1 ? `
+  <a href="${s.sns1}" target="_blank" rel="noopener noreferrer"
+    class="sns-btn w-10 h-10 rounded-full flex items-center justify-center"
+    style="
+      background: #000000;
+    ">
+    <!-- TikTok -->
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
+      stroke="#FFFFFF" stroke-width="3">
+      <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/>
+    </svg>
+  </a>
+  ` : ''}
 
-    <a href="${s.sns1}" target="_blank" rel="noopener noreferrer"
-      class="sns-btn w-10 h-10 rounded-full flex items-center justify-center"
-      style="
-        background: linear-gradient(135deg, #5C57B2, #2A2B53);
-        border: 1px solid #FFFFFF;
-      ">
-        <!-- TikTok placeholder -->
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/>
-          </svg>
-    </a>
 
-    <a href="${s.sns2}" target="_blank" rel="noopener noreferrer"
-      class="sns-btn w-10 h-10 rounded-full flex items-center justify-center"
-      style="
-        background: linear-gradient(135deg, #5C57B2, #2A2B53);
-        border: 1px solid #FFFFFF;
-      ">
-       <!-- Instagram placeholder -->
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-            <circle cx="12" cy="12" r="5"/>
-            <circle cx="17.5" cy="6.5" r="1.5" fill="#e0d5c1" stroke="none"/>
-          </svg>
-    </a>
-  </div>
+  ${s.sns2 ? `
+  <a href="${s.sns2}" target="_blank" rel="noopener noreferrer"
+    class="sns-btn w-10 h-10 rounded-full flex items-center justify-center"
+    style="
+      background: linear-gradient(135deg, #FEDA75, #FA7E1E, #D62976, #962FBF, #4F5BD5);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    ">
+    <!-- Instagram -->
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
+      stroke="#FFFFFF" stroke-width="1.8"
+      stroke-linecap="round" stroke-linejoin="round">
+      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+      <circle cx="12" cy="12" r="5"/>
+      <circle cx="17.5" cy="6.5" r="1.5" fill="#FFFFFF" stroke="none"/>
+    </svg>
+  </a>
+  ` : ''}
+
+  ${s.sns3 ? `
+  <a href="${s.sns3}" target="_blank" rel="noopener noreferrer"
+    class="sns-btn w-10 h-10 rounded-full flex items-center justify-center"
+    style="
+      background: linear-gradient(135deg, #FF0000, #CC0000);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    ">
+    <!-- YouTube -->
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="#FFFFFF">
+      <path d="M23.5 6.2a2.9 2.9 0 0 0-2-2C19.8 3.7 12 3.7 12 3.7s-7.8 0-9.5.5a2.9 2.9 0 0 0-2 2A30 30 0 0 0 0 12a30 30 0 0 0 .5 5.8 2.9 2.9 0 0 0 2 2c1.7.5 9.5.5 9.5.5s7.8 0 9.5-.5a2.9 2.9 0 0 0 2-2A30 30 0 0 0 24 12a30 30 0 0 0-.5-5.8zM9.8 15.5V8.5l6.4 3.5-6.4 3.5z"/>
+    </svg>
+  </a>
+  ` : ''}
+
+</div>
+
+
 
 <img src="${s.iconImage}"
      style="
-       width:90px;
-       height:90px;
+       width:100px;
+       height:100px;
        object-fit:cover;
        border-radius:50%;
-       border:3px solid #fff;
+       border:4px solid #fff;
        position:absolute;
        left:20px;
-       bottom:-42px;
+       bottom:-45px;
      ">
 
 
   </div>
 
    <!-- modal内のInfo -->
- <div class="px-5 pb-6 pt-10">
-   <!-- Icon --
-<img src="${s.iconImage}"
-     style="
-       width:84px;
-       height:84px;
-       object-fit:cover;
-       border-radius:50%;
-       border:3px solid #fff;
-       display:block;
-       box-shadow:0 6px 18px rgba(0,0,0,0.25);
-     ">
-
+<div class="px-5 pb-6" style="padding-top:60px;">
 
 <!-- Name -->
 <h2 class="font-display font-700 text-xl tracking-wider"
