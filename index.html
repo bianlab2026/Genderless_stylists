@@ -436,20 +436,24 @@ function renderGrid() {
 
     // ヘッダー画像 (aspect-ratio 3/1)
     const headerWrap = document.createElement('div');
-    headerWrap.style.cssText = 'position:relative; width:100%; aspect-ratio:3/1; overflow:hidden; border-radius:16px 16px 0 0;';
+    headerWrap.style.cssText = 'position:relative; width:100%; aspect-ratio:3/1; border-radius:16px 16px 0 0; overflow:hidden;';
 
     const headerImg = document.createElement('img');
     headerImg.src = s.headerImage;
     headerImg.alt = s.name + ' header';
     headerImg.style.cssText = 'width:100%; height:100%; object-fit:cover; display:block;';
     headerWrap.appendChild(headerImg);
+    card.appendChild(headerWrap);
 
-    // アイコン — ヘッダー下端に重ねる（overflow:visibleにした親カードで見える）
+    // アイコン専用の行（通常フローで高さを確保しつつ、アイコンを中央に浮かせる）
+    const iconRow = document.createElement('div');
+    iconRow.style.cssText = 'position:relative; width:100%; height:36px;'; // 64pxの半分=32px + 余白4px
+
     const iconWrap = document.createElement('div');
-    iconWrap.style.cssText = 'position:absolute; left:50%; bottom:0; transform:translate(-50%, 40px); z-index:1;';
+    iconWrap.style.cssText = 'position:absolute; left:50%; top:-32px; transform:translateX(-50%); z-index:10;';
 
     const icon = document.createElement('div');
-    icon.style.cssText = 'width:72px; height:72px; border-radius:50%; border:3px solid #FFFFFF; overflow:hidden; background:#eee;';
+    icon.style.cssText = 'width:64px; height:64px; border-radius:50%; border:3px solid #FFFFFF; overflow:hidden; background:#eee;';
 
     const iconImg = document.createElement('img');
     iconImg.src = s.iconImage;
@@ -458,12 +462,12 @@ function renderGrid() {
 
     icon.appendChild(iconImg);
     iconWrap.appendChild(icon);
-    headerWrap.appendChild(iconWrap);
-    card.appendChild(headerWrap);
+    iconRow.appendChild(iconWrap);
+    card.appendChild(iconRow);
 
     // テキスト情報
     const info = document.createElement('div');
-    info.style.cssText = 'padding: 48px 10px 12px; text-align:center;';
+    info.style.cssText = 'padding: 8px 10px 12px; text-align:center;';
 
     // 名前
     const name = document.createElement('p');
