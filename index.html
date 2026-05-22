@@ -1,273 +1,239 @@
 <!doctype html>
 <html lang="ja" class="h-full">
- <head>
+<head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
   <title>GENDERLESS HAIR BOOK</title>
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
-  <script src="/_sdk/element_sdk.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&amp;family=Outfit:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <script>
-tailwind.config = {
-  theme: {
-    extend: {
-      fontFamily: {
-        display: ['Outfit', 'sans-serif'],
-        body: ['Zen Kaku Gothic New', 'sans-serif']
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Outfit', 'sans-serif'],
+            body: ['Zen Kaku Gothic New', 'sans-serif']
+          }
+        }
       }
     }
-  }
-}
-</script>
+  </script>
   <style>
-html, body { height: 100%; margin: 0; }
+    html, body { height: 100%; margin: 0; }
 
-/* Scrollbar */
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: #555; border-radius: 2px; }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #555; border-radius: 2px; }
 
-/* Animations */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-@keyframes modalIn {
-  from { opacity: 0; transform: scale(0.95) translateY(10px); }
-  to { opacity: 1; transform: scale(1) translateY(0); }
-}
-@keyframes backdropIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-@keyframes tagIn {
-  from { opacity: 0; transform: scale(0.8); }
-  to { opacity: 1; transform: scale(1); }
-}
-.animate-fade-up {
-  animation: fadeUp 0.5s ease forwards;
-  opacity: 0;
-}
-.animate-modal { animation: modalIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-.animate-backdrop { animation: backdropIn 0.25s ease forwards; }
-.animate-tag { animation: tagIn 0.3s ease forwards; }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes modalIn {
+      from { opacity: 0; transform: scale(0.95) translateY(10px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    @keyframes backdropIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes tagIn {
+      from { opacity: 0; transform: scale(0.8); }
+      to   { opacity: 1; transform: scale(1); }
+    }
 
-/* Card hover */
-.stylist-card {
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-.stylist-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 22px rgba(64,114,194,0.18);
-}
+    .animate-fade-up  { animation: fadeUp 0.5s ease forwards; opacity: 0; }
+    .animate-modal    { animation: modalIn 0.35s cubic-bezier(0.16,1,0.3,1) forwards; }
+    .animate-backdrop { animation: backdropIn 0.25s ease forwards; }
+    .animate-tag      { animation: tagIn 0.3s ease forwards; }
 
+    /* カード hover */
+    .stylist-card { transition: transform 0.25s ease, box-shadow 0.25s ease; }
+    .stylist-card:hover { transform: translateY(-4px); box-shadow: 0 10px 22px rgba(64,114,194,0.18); }
 
-/* Filter chip */
-.filter-chip {
-  transition: all 0.2s ease;
-}
-.filter-chip:hover {
-  transform: scale(1.03);
-}
-.filter-chip.active {
-  box-shadow: 0 0 0 2px #e0d5c1;
-}
+    /* ジャンルフィルター */
+    .filter-chip {
+      padding: 8px 14px;
+      border-radius: 9999px;
+      font-size: 12px;
+      font-weight: 600;
+      background: #1C228E;
+      color: #94B7EF;
+      transition: all 0.2s ease;
+      border: none;
+      white-space: nowrap;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .filter-chip:hover { opacity: 0.85; }
+    .filter-chip.active { background: #FFFFFF; color: #1C228E; }
 
-/* Dropdown styling */
-.dropdown-panel {
-  max-height: 260px;
-  overflow-y: auto;
-}
-.dropdown-panel::-webkit-scrollbar { width: 3px; }
-.dropdown-panel::-webkit-scrollbar-thumb { background: #888; border-radius: 2px; }
+    /* エリアドロップダウン */
+    .area-btn {
+      background: #FFFFFF;
+      color: #4072C2;
+      border: 1px solid #4072C2;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    .area-btn.active {
+      background: #E8EDFF;
+      border: 1px solid #4072C2;
+      box-shadow: 0 4px 10px rgba(64,114,194,0.25);
+    }
+    .area-item {
+      color: #6B7280;
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .area-item:hover  { background: #E8EDFF; color: #4072C2; }
+    .area-item.active { background: #4072C2; color: #FFFFFF; }
 
-/* SNS button pulse */
-.sns-btn {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-	box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+    .dropdown-panel { max-height: 260px; overflow-y: auto; }
+    .dropdown-panel::-webkit-scrollbar { width: 3px; }
+    .dropdown-panel::-webkit-scrollbar-thumb { background: #888; border-radius: 2px; }
 
-}
-.sns-btn:hover {
-  transform: scale(1.12);
-  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
-}
+    /* SNSボタン */
+    .sns-btn { transition: transform 0.2s ease, box-shadow 0.2s ease; box-shadow: 0 4px 12px rgba(0,0,0,0.35); }
+    .sns-btn:hover { transform: scale(1.12); box-shadow: 0 4px 16px rgba(0,0,0,0.4); }
 
-/* 検索UI */
-.filter-chip {
-  padding: 8px 16px;
-  border-radius: 9999px;
-  font-size: 12px;
-  font-weight: 600;
-  background: #E8EDFF;
-  color: #4072C2;
-  transition: all 0.2s ease;
-  border: 1px solid transparent;
-}
+    /* モーダル — スマホは画面下から全幅で表示 */
+    #modalOverlay {
+      align-items: flex-end; /* スマホ: 下から */
+    }
+    #modalContent {
+      width: 100%;
+      max-width: 100%;
+      max-height: 92dvh;
+      border-radius: 20px 20px 0 0;
+      overflow-y: auto;
+    }
+    @media (min-width: 480px) {
+      #modalOverlay { align-items: center; }
+      #modalContent {
+        max-width: 400px;
+        max-height: 90vh;
+        border-radius: 20px;
+      }
+    }
 
-.filter-chip:hover {
-  background: #D6E4FF;
-}
+    /* アイコンオーバーラップ — カード用 */
+    .card-icon-wrap {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      /* ヘッダー高さ(aspect-ratio 3/1 of card width)に合わせて下端基準で配置 */
+      bottom: 0;
+      transform: translate(-50%, 40px); /* 40px = アイコン半径 */
+    }
 
-.filter-chip.active {
-  background: #4072C2;
-  color: #FFFFFF;
-  box-shadow: 0 4px 10px rgba(64,114,194,0.35);
-}
+    /* フィルター行 — 横スクロール対応 */
+    .chip-row {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding-bottom: 2px;
+    }
+    .chip-row::-webkit-scrollbar { display: none; }
 
+    /* 結果カウント */
+    #resultCount { margin-top: 20px; }
 
-.area-btn {
-  background: #FFFFFF;
-  color: #4072C2;
-  border: 1px solid #4072C2;
-  transition: all 0.2s ease;
-}
+    /* グリッド: スマホ2列 → sm以上は必要に応じて */
+    #stylistGrid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+  </style>
+</head>
 
-.area-btn.active {
-  background: #E8EDFF;
-  border: 1px solid #4072C2;
-  box-shadow: 0 4px 10px rgba(64,114,194,0.25);
-}
-
-/* 未選択 → グレー ホバー → ふわ青 選択 → しっかり青 */
-.area-item {
-  color: #6B7280;
-  background: transparent;
-}
-
-.area-item:hover {
-  background: #E8EDFF;
-  color: #4072C2;
-}
-
-.area-item.active {
-  background: #4072C2;
-  color: #FFFFFF;
-}
-
-#resultCount {
-  margin-top: 24px;
-}
-
-
-</style>
-  <style>body { box-sizing: border-box; }</style>
-  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
- </head>
-	
-	
-	  <!-- 全体背景 -->
 <body class="min-h-screen m-0">
-  <div id="app" class="w-full min-h-screen" style="background: linear-gradient(0deg, #FFFFFF 0%, #E8EDFF 50%, #bcd8ff 80%); color: #FFFFFF; font-family: 'Zen Kaku Gothic New', sans-serif;">
-	  
-	  <!-- Header -->
-   <header class="w-full relative overflow-visible pt-6">
-  <img 
-    src="https://storage.googleapis.com/studio-design-asset-files/projects/ogO06Y25a2/s-574x292_webp_e9b60283-a3aa-4b3f-b577-bd050e56a5f5.png" 
-    alt="タイプヘッダー画像"
-    class="w-40 sm:w-60 md:w-56 h-auto mx-auto"
+<div id="app" class="w-full min-h-screen" style="background: linear-gradient(0deg,#FFFFFF 0%,#E8EDFF 50%,#bcd8ff 80%); color:#FFFFFF; font-family:'Zen Kaku Gothic New',sans-serif;">
 
-  >
-</header>
+  <!-- Header -->
+  <header class="w-full relative overflow-visible pt-6">
+    <img
+      src="https://storage.googleapis.com/studio-design-asset-files/projects/ogO06Y25a2/s-574x292_webp_e9b60283-a3aa-4b3f-b577-bd050e56a5f5.png"
+      alt="タイプヘッダー画像"
+      class="h-auto mx-auto"
+      style="width: clamp(140px, 45vw, 220px);"
+    >
+  </header>
 
-   <main class="w-full px-3 pb-8" style="max-width: 640px; margin: 0 auto;">
+  <main style="width:100%; max-width:640px; margin:0 auto; padding:0 12px 32px;">
 
-
-	   <!-- Filter Section -->
+    <!-- Filter Section -->
     <section id="filterCard"
-  class="mt-6 p-5 rounded-2xl relative z-50"
-  style="
-    background: rgba(255,255,255,0.7);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(64,114,194,0.2);
-  ">
+      class="mt-6 p-4 rounded-2xl relative z-50"
+      style="background:rgba(255,255,255,0.7); backdrop-filter:blur(12px); border:1px solid rgba(64,114,194,0.2);">
 
-<h2 class="text-sm font-bold mb-4" style="color:#1C228E;">
-  絞り込み
-</h2>
+      <h2 class="text-sm font-bold mb-3" style="color:#1C228E;">絞り込み</h2>
 
-		<!-- Genre Filter -->
-     <div class="mb-4">
-  <p class="text-xs font-semibold mb-2" style="color:#1C228E;">ジャンル</p>
-  <div class="flex gap-2">
-
-<button id="btnAll" class="filter-chip active px-4 py-2 rounded-full text-xs font-medium" onclick="setGenre('all')">
-		 All</button> 
-		 
-		 <button id="btnMens" class="filter-chip px-4 py-2 rounded-full text-xs font-medium" onclick="setGenre('メンズカット')">
-			 メンズカット</button> 
-		 
-		 <button id="btnChusei" class="filter-chip px-4 py-2 rounded-full text-xs font-medium" onclick="setGenre('中性')">
-			 中性 </button>
-     </div>
-</div>
-
-
-		
-		<!-- Area Filter -->
-<p class="text-xs font-semibold mb-2" style="color:#1C228E;">エリア</p>
-
-     <div class="relative mb-4">
-
-<button id="areaDropdownBtn"
-  onclick="toggleAreaDropdown()"
-  class="area-btn w-full flex items-center justify-between px-4 py-3 rounded-xl text-xs">
-
-  <span id="areaDropdownLabel">エリアを選択</span>
-  <svg class="w-4 h-4 transition-transform" id="areaArrow" viewBox="0 0 20 20" fill="currentColor">
-    <path fill-rule="evenodd"
-      d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" />
-  </svg>
-</button>
-
-
-      <div id="areaDropdown" class="hidden absolute z-[999] mt-1 w-full rounded-xl shadow-2xl dropdown-panel" style="background: #C4DBFF; border: 1px solid #4072C2;">
-       <div class="p-3 grid grid-cols-3 gap-1" id="areaGrid"></div>
+      <!-- ジャンル -->
+      <div class="mb-4">
+        <p class="text-xs font-semibold mb-2" style="color:#1C228E;">ジャンル</p>
+        <div class="chip-row">
+          <button id="btnAll"    class="filter-chip active" onclick="setGenre('all')">All</button>
+          <button id="btnMens"   class="filter-chip"        onclick="setGenre('メンズカット')">メンズカット</button>
+          <button id="btnChusei" class="filter-chip"        onclick="setGenre('中性')">中性</button>
+        </div>
       </div>
-     </div>
 
+      <!-- エリア -->
+      <p class="text-xs font-semibold mb-2" style="color:#1C228E;">エリア</p>
+      <div class="relative mb-4">
+        <button id="areaDropdownBtn"
+          onclick="toggleAreaDropdown()"
+          class="area-btn w-full flex items-center justify-between px-4 py-3 rounded-xl text-xs">
+          <span id="areaDropdownLabel">エリアを選択</span>
+          <svg class="w-4 h-4 transition-transform flex-shrink-0" id="areaArrow" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/>
+          </svg>
+        </button>
 
-<!-- Active Conditions -->
-     <div id="activeConditions" class="flex flex-wrap gap-1.5 mb-4 min-h-[28px]"><span class="animate-tag inline-flex items-center px-3 py-1 rounded-full text-xs font-medium" style="background: #FFFFFF; color: #A79DD0;">All</span>
-     </div>
+        <div id="areaDropdown" class="hidden absolute z-[999] mt-1 w-full rounded-xl shadow-2xl dropdown-panel"
+          style="background:#C4DBFF; border:1px solid #4072C2;">
+          <div class="p-3 grid grid-cols-3 gap-1" id="areaGrid"></div>
+        </div>
+      </div>
+
+      <!-- 選択中の条件タグ -->
+      <div id="activeConditions" class="flex flex-wrap gap-1.5 min-h-[28px]">
+        <span class="animate-tag inline-flex items-center px-3 py-1 rounded-full text-xs font-medium"
+          style="background:#FFFFFF; color:#A79DD0;">All</span>
+      </div>
     </section>
 
+    <!-- 件数 -->
+    <p id="resultCount" class="text-xs" style="color:#272729;"></p>
 
-<!-- Results Count -->
-    <div class="flex items-center justify-between mb-4">
-     <p id="resultCount" class="text-xs" style="color: #272729;"></p>
-    </div><!-- Grid -->
-    <div id="stylistGrid"
-  class="grid grid-cols-2 gap-3 relative z-0">
+    <!-- カードグリッド -->
+    <div id="stylistGrid"></div>
 
+    <!-- 0件 -->
+    <div id="noResults" class="hidden text-center py-16">
+      <div class="text-4xl mb-3">✂️</div>
+      <p class="text-sm" style="color:#272729;">条件に一致する美容師が見つかりません</p>
+    </div>
+  </main>
+
+  <!-- Modal Overlay -->
+  <div id="modalOverlay"
+    class="hidden fixed inset-0 z-50 flex"
+    style="background:rgba(0,0,0,0.5);"
+    onclick="handleOverlayClick(event)">
+    <div id="modalContent"
+      style="background:#FFFFFF; box-shadow:0 10px 30px rgba(0,0,0,0.25); margin:auto;"
+      onclick="event.stopPropagation()">
+    </div>
+  </div>
 </div>
 
-
-<!-- No results -->
-    <div id="noResults" class="hidden text-center py-16">
-     <div class="text-4xl mb-3">
-      ✂️
-     </div>
-     <p class="text-sm" style="color: #272729;">条件に一致する美容師が見つかりません</p>
-    </div>
-
-
-   </main>
-
-
-
-<!-- Modal Overlay -->
-   <div id="modalOverlay"
-     class="hidden fixed inset-0 z-50 flex items-center justify-center"
-     onclick="closeModal(event)">
-    <div id="modalContent" class="w-full overflow-y-auto rounded-t-2xl sm:rounded-2xl" style="max-width: 360px; max-height: 90%; background: #FFFFFF; box-shadow: 0 10px 30px rgba(0,0,0,0.25);"
-onclick="event.stopPropagation()"><!-- Modal inner content injected by JS -->
-    </div>
-   </div>
-  </div>
-	 
-	 
-	 
-  <script>
+<script>
 // ----- DATA -----
 const PREFECTURES = [
   "北海道","青森","岩手","宮城","秋田","山形","福島",
@@ -286,24 +252,22 @@ const STYLISTS = [
     genre: ["メンズカット"],
     area: "大阪",
     bio: "大阪でカッコよくなりたい、メンズスタイルをやりたい女性は全てお任せあれ！！！",
-    headerImage: "images/fujiwarasayu3.jpeg", 
-    iconImage: "images/fujiwarasayu2.jpeg",
-    mainImage: "images/fujiwarasayu3.jpeg",
-
+    headerImage: "images/fujiwarasayu3.jpeg",
+    iconImage:   "images/fujiwarasayu2.jpeg",
+    mainImage:   "images/fujiwarasayu3.jpeg",
     sns1: "https://www.tiktok.com/@fdj207495725?_r=1&_t=ZS-940ItnfM8tW",
     sns2: "https://www.instagram.com/fujiwara_sayu?igsh=MTg1YWE0aGE3eDBrYg%3D%3D&utm_source=qr",
-	sns3:"https://youtube.com/@fujiwara_sayu?si=6UtBmn9T9wIWICxV"
+    sns3: "https://youtube.com/@fujiwara_sayu?si=6UtBmn9T9wIWICxV"
   },
-	
   {
     id: 2,
     name: "イマダナツミ",
     genre: ["メンズカット"],
     area: "東京",
     bio: "自分自身ボーイッシュとして美容室でのジレンマをたくさん感じてきました。誰よりも寄り添い、性別に囚われないカッコいいを作ります！骨格やファッションに合わせた提案も得意です！",
-    headerImage: "images/imadanatumi3.jpeg", 
-	iconImage: "images/imadanatumi2.jpeg",
-	mainImage: "images/imadanatumi3.jpeg",
+    headerImage: "images/imadanatumi3.jpeg",
+    iconImage:   "images/imadanatumi2.jpeg",
+    mainImage:   "images/imadanatumi3.jpeg",
     sns1: "https://www.tiktok.com/@lmdbynalu?_r=1&_t=ZS-93veFThVvgg",
     sns2: "https://www.instagram.com/lmdbynalu/"
   },
@@ -313,26 +277,25 @@ const STYLISTS = [
     genre: ["メンズカット"],
     area: "東京",
     bio: "ボーイッシュ専門。メンズカット・パーマに特化し、ロングからのバッサリ実績多数。",
-    headerImage: "images/tanakaanon1.jpeg", 
-	iconImage: "images/tanakaanon2.jpg",
-	mainImage: "images/tanakaanon3.jpeg",
+    headerImage: "images/tanakaanon1.jpeg",
+    iconImage:   "images/tanakaanon2.jpg",
+    mainImage:   "images/tanakaanon3.jpeg",
     sns1: "https://www.tiktok.com/@tanaka_anon?_r=1&_t=ZS-944tPr3yVoC",
     sns2: "https://www.instagram.com/tanaka_anon?igsh=azEwY3J3ZGwzcTc0"
   },
-  
 ];
 
 // ----- STATE -----
-let selectedGenres = []; // empty = all
-let selectedAreas = []; // empty = all
+let selectedGenres = [];
+let selectedAreas  = [];
 let areaDropdownOpen = false;
 
-// ----- INIT AREA GRID -----
+// ----- AREA GRID -----
 function initAreaGrid() {
   const grid = document.getElementById('areaGrid');
   PREFECTURES.forEach(pref => {
     const btn = document.createElement('button');
-    btn.className = 'area-item text-xs py-1.5 px-1 rounded-lg text-center transition-all';
+    btn.className = 'area-item text-xs py-1.5 px-1 rounded-lg text-center';
     btn.dataset.pref = pref;
     btn.textContent = pref;
     btn.onclick = (e) => { e.stopPropagation(); toggleArea(pref); };
@@ -342,20 +305,16 @@ function initAreaGrid() {
 
 function toggleAreaDropdown() {
   areaDropdownOpen = !areaDropdownOpen;
-  const dd = document.getElementById('areaDropdown');
+  const dd    = document.getElementById('areaDropdown');
   const arrow = document.getElementById('areaArrow');
-  if (areaDropdownOpen) {
-    dd.classList.remove('hidden');
-    arrow.style.transform = 'rotate(180deg)';
-  } else {
-    dd.classList.add('hidden');
-    arrow.style.transform = 'rotate(0)';
-  }
+  dd.classList.toggle('hidden', !areaDropdownOpen);
+  arrow.style.transform = areaDropdownOpen ? 'rotate(180deg)' : 'rotate(0)';
 }
 
-// Close dropdown when clicking outside
 document.addEventListener('click', (e) => {
-  if (areaDropdownOpen && !e.target.closest('#areaDropdownBtn') && !e.target.closest('#areaDropdown')) {
+  if (areaDropdownOpen &&
+      !e.target.closest('#areaDropdownBtn') &&
+      !e.target.closest('#areaDropdown')) {
     areaDropdownOpen = false;
     document.getElementById('areaDropdown').classList.add('hidden');
     document.getElementById('areaArrow').style.transform = 'rotate(0)';
@@ -364,35 +323,23 @@ document.addEventListener('click', (e) => {
 
 function toggleArea(pref) {
   const idx = selectedAreas.indexOf(pref);
-
-  if (idx > -1) {
-    selectedAreas.splice(idx, 1);
-  } else {
-    selectedAreas.push(pref);
-  }
-
+  if (idx > -1) selectedAreas.splice(idx, 1);
+  else          selectedAreas.push(pref);
   updateAreaUI();
   renderAll();
 }
 
-
-
 function updateAreaUI() {
   document.querySelectorAll('.area-item').forEach(btn => {
-    const active = selectedAreas.includes(btn.dataset.pref);
-    btn.classList.toggle('active', active);
+    btn.classList.toggle('active', selectedAreas.includes(btn.dataset.pref));
   });
-
   const label = document.getElementById('areaDropdownLabel');
-
   if (selectedAreas.length === 0) {
     label.textContent = 'エリアを選択';
   } else if (selectedAreas.length <= 3) {
     label.textContent = selectedAreas.join('・');
   } else {
-    label.textContent =
-      selectedAreas.slice(0,3).join('・') +
-      ` 他${selectedAreas.length - 3}件`;
+    label.textContent = selectedAreas.slice(0,3).join('・') + ` 他${selectedAreas.length-3}件`;
   }
 }
 
@@ -402,116 +349,68 @@ function setGenre(genre) {
     selectedGenres = [];
   } else {
     const idx = selectedGenres.indexOf(genre);
-    if (idx > -1) {
-      selectedGenres.splice(idx, 1);
-    } else {
-      selectedGenres.push(genre);
-    }
+    if (idx > -1) selectedGenres.splice(idx, 1);
+    else          selectedGenres.push(genre);
   }
-
   updateGenreUI();
   renderAll();
 }
 
-
-
 function updateGenreUI() {
-  const btnAll = document.getElementById('btnAll');
-  const btnMens = document.getElementById('btnMens');
+  const btnAll    = document.getElementById('btnAll');
+  const btnMens   = document.getElementById('btnMens');
   const btnChusei = document.getElementById('btnChusei');
   const isAll = selectedGenres.length === 0;
 
-  [btnAll, btnMens, btnChusei].forEach(btn => {
-    btn.classList.remove('active');
-    btn.style.color = '#94B7EF';
-    btn.style.background = '#1C228E';
-  });
-
-  if (isAll) {
-    btnAll.classList.add('active');
-    btnAll.style.color = '#1C228E';
-    btnAll.style.background = '#FFFFFF';
-  }
-  if (selectedGenres.includes('メンズカット')) {
-    btnMens.classList.add('active');
-    btnMens.style.color = '#1C228E';
-    btnMens.style.background = '#FFFFFF';
-  }
-  if (selectedGenres.includes('中性')) {
-    btnChusei.classList.add('active');
-    btnChusei.style.color = '#1C228E';
-    btnChusei.style.background = '#FFFFFF';
-  }
+  [btnAll, btnMens, btnChusei].forEach(btn => btn.classList.remove('active'));
+  if (isAll)                               btnAll.classList.add('active');
+  if (selectedGenres.includes('メンズカット')) btnMens.classList.add('active');
+  if (selectedGenres.includes('中性'))      btnChusei.classList.add('active');
 }
 
-// ----- FILTER & RENDER -----
+// ----- FILTER -----
 function getFilteredStylists() {
   return STYLISTS.filter(s => {
     const genreMatch = selectedGenres.length === 0 || selectedGenres.some(g => s.genre.includes(g));
-    const areaMatch = selectedAreas.length === 0 || selectedAreas.includes(s.area);
+    const areaMatch  = selectedAreas.length  === 0 || selectedAreas.includes(s.area);
     return genreMatch && areaMatch;
   });
 }
 
+// ----- ACTIVE CONDITIONS -----
 function renderActiveConditions() {
   const container = document.getElementById('activeConditions');
   container.innerHTML = '';
   const isAll = selectedGenres.length === 0 && selectedAreas.length === 0;
-
   if (isAll) {
-    const tag = createConditionTag('All', null);
-    container.appendChild(tag);
+    container.appendChild(createConditionTag('All', null));
     return;
   }
-
-  selectedGenres.forEach(g => {
-    container.appendChild(createConditionTag(g, () => { setGenre(g); }));
-  });
-  selectedAreas.forEach(a => {
-    container.appendChild(createConditionTag(a, () => { toggleArea(a); updateAreaUI(); }));
-  });
+  selectedGenres.forEach(g => container.appendChild(createConditionTag(g, () => setGenre(g))));
+  selectedAreas.forEach(a  => container.appendChild(createConditionTag(a, () => { toggleArea(a); updateAreaUI(); })));
 }
 
-// -----選択中の条件スタイル -----
 function createConditionTag(text, onRemove) {
   const span = document.createElement('span');
   span.className = 'animate-tag inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium';
-  span.style.cssText = `
-  background: #EDE9FE;
-  color: #5B21B6;
-  border: 1px solid #C4B5FD;
-`;
-
+  span.style.cssText = 'background:#EDE9FE; color:#5B21B6; border:1px solid #C4B5FD;';
   span.textContent = text;
   if (onRemove) {
     const x = document.createElement('button');
     x.innerHTML = '&times;';
-  x.className = 'ml-1 flex items-center justify-center';
-
-x.style.cssText = `
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: #5B21B6;
-  color: #FFFFFF;
-  font-size: 11px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-`;
-
+    x.style.cssText = 'width:16px;height:16px;border-radius:50%;background:#5B21B6;color:#FFFFFF;font-size:11px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;';
     x.onclick = (e) => { e.stopPropagation(); onRemove(); };
     span.appendChild(x);
   }
   return span;
 }
 
+// ----- RENDER GRID -----
 function renderGrid() {
-  const grid = document.getElementById('stylistGrid');
-  const noResults = document.getElementById('noResults');
+  const grid        = document.getElementById('stylistGrid');
+  const noResults   = document.getElementById('noResults');
   const resultCount = document.getElementById('resultCount');
-  const filtered = getFilteredStylists();
+  const filtered    = getFilteredStylists();
 
   resultCount.textContent = `${filtered.length}人の美容師`;
 
@@ -522,94 +421,76 @@ function renderGrid() {
   }
   noResults.classList.add('hidden');
 
-  //一覧カード Build new content
   const frag = document.createDocumentFragment();
   filtered.forEach((s, i) => {
     const card = document.createElement('div');
-    card.className = 'stylist-card rounded-2xl overflow-hidden cursor-pointer animate-fade-up relative';
+    card.className = 'stylist-card rounded-2xl overflow-visible cursor-pointer animate-fade-up relative';
     card.style.cssText = `
-  background: rgba(255,255,255,0.85);
-  backdrop-filter: blur(6px);
--webkit-backdrop-filter: blur(6px);
-  border: 1px solid rgba(64,114,194,0.15);
-  animation-delay: ${i * 0.07}s;
-`;
-
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border: 1px solid rgba(64,114,194,0.15);
+      animation-delay: ${i*0.07}s;
+    `;
     card.onclick = () => openModal(s);
 
-    // Header
-    const header = document.createElement('div');
-header.className = 'w-full relative aspect-[3/1]';
+    // ヘッダー画像 (aspect-ratio 3/1)
+    const headerWrap = document.createElement('div');
+    headerWrap.style.cssText = 'position:relative; width:100%; aspect-ratio:3/1; overflow:hidden; border-radius:16px 16px 0 0;';
 
-if (s.headerImage) {
-  const img = document.createElement('img');
-  img.src = s.headerImage;
-  img.className = 'w-full h-full object-cover';
-  img.alt = s.name + ' header';
-  header.appendChild(img);
-} else {
-  header.style.background = s.headerColor;
-}
+    const headerImg = document.createElement('img');
+    headerImg.src = s.headerImage;
+    headerImg.alt = s.name + ' header';
+    headerImg.style.cssText = 'width:100%; height:100%; object-fit:cover; display:block;';
+    headerWrap.appendChild(headerImg);
 
-card.appendChild(header);
+    // アイコン — ヘッダー下端に重ねる（overflow:visibleにした親カードで見える）
+    const iconWrap = document.createElement('div');
+    iconWrap.style.cssText = 'position:absolute; left:50%; bottom:0; transform:translate(-50%, 40px); z-index:1;';
 
+    const icon = document.createElement('div');
+    icon.style.cssText = 'width:72px; height:72px; border-radius:50%; border:3px solid #FFFFFF; overflow:hidden; background:#eee;';
 
+    const iconImg = document.createElement('img');
+    iconImg.src = s.iconImage;
+    iconImg.alt = s.name + ' icon';
+    iconImg.style.cssText = 'width:100%; height:100%; object-fit:cover; display:block;';
 
-   // Icon
-if (s.iconImage) {
-  const iconWrap = document.createElement('div');
-  iconWrap.className = 'absolute left-1/2 -translate-x-1/2';
-  iconWrap.style.cssText = 'top: 30px;';
+    icon.appendChild(iconImg);
+    iconWrap.appendChild(icon);
+    headerWrap.appendChild(iconWrap);
+    card.appendChild(headerWrap);
 
-  const icon = document.createElement('div');
-  icon.className = 'rounded-full overflow-hidden';
-  icon.style.cssText = `
-    width: 80px;
-    height: 80px;
-    border: 3px solid #FFFFFF;
-  `;
-
-  const img = document.createElement('img');
-  img.src = s.iconImage;
-  img.className = 'w-full h-full object-cover';
-  img.alt = s.name + ' icon';
-
-  icon.appendChild(img);
-  iconWrap.appendChild(icon);
-  card.appendChild(iconWrap);
-}
-
-
-    // プロフィール
+    // テキスト情報
     const info = document.createElement('div');
-    info.className = 'px-3 pb-3 pt-6';
-//名前
+    info.style.cssText = 'padding: 48px 10px 12px; text-align:center;';
+
+    // 名前
     const name = document.createElement('p');
-    name.className = 'font-display font-600 text-center text-sm tracking-wide';
-    name.style.color = '#0F0646';
+    name.style.cssText = 'font-family:Outfit,sans-serif; font-weight:600; font-size:13px; color:#0F0646; margin:0;';
     name.textContent = s.name;
     info.appendChild(name);
-//ジャンル
+
+    // ジャンルタグ
     const tags = document.createElement('div');
-    tags.className = 'flex flex-wrap gap-1 justify-center mt-1.5';
+    tags.style.cssText = 'display:flex; flex-wrap:wrap; gap:4px; justify-content:center; margin-top:6px;';
     s.genre.forEach(g => {
       const t = document.createElement('span');
-      t.className = 'text-xs px-2 py-0.5 rounded-full';
-      t.style.cssText = 'background: #E0E7FF; color: #3730A3; font-size: 9px;';
+      t.style.cssText = 'background:#E0E7FF; color:#3730A3; font-size:9px; padding:2px 8px; border-radius:9999px;';
       t.textContent = g;
       tags.appendChild(t);
     });
     info.appendChild(tags);
-//エリア
+
+    // エリア
     const area = document.createElement('p');
-    area.className = 'text-center mt-1';
-    area.style.cssText = 'font-size: 10px; color: #9797A0;';
+    area.style.cssText = 'font-size:10px; color:#9797A0; margin:4px 0 0;';
     area.textContent = `📍 ${s.area}`;
     info.appendChild(area);
-//bio
+
+    // bio
     const bio = document.createElement('p');
-    bio.className = 'mt-2 leading-relaxed';
-    bio.style.cssText = 'font-size: 11px; color: #272729; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;';
+    bio.style.cssText = 'font-size:11px; color:#272729; margin-top:8px; line-height:1.6; text-align:left; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;';
     bio.textContent = s.bio;
     info.appendChild(bio);
 
@@ -631,245 +512,82 @@ function openModal(s) {
   const overlay = document.getElementById('modalOverlay');
   const content = document.getElementById('modalContent');
 
-content.innerHTML = `
-  <!-- Header -->
-  <div class="relative" style="
-    height: 120px;
-    background-image: url('${s.headerImage}');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  ">
-    <button onclick="closeModal()" 
-      class="absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center"
-      style="background: rgba(0,0,0,0.4); color: #e0d5c1; font-size: 18px; backdrop-filter: blur(4px);">
-      &times;
-    </button>
+  content.innerHTML = `
+    <div style="position:relative; height:130px; background-image:url('${s.headerImage}'); background-size:cover; background-position:center; flex-shrink:0;">
+      <button onclick="closeModalDirect()"
+        style="position:absolute; top:12px; right:12px; width:32px; height:32px; border-radius:50%; background:rgba(0,0,0,0.4); color:#fff; font-size:20px; display:flex; align-items:center; justify-content:center; cursor:pointer; border:none; backdrop-filter:blur(4px);">
+        &times;
+      </button>
 
+      <!-- SNSボタン — ヘッダー右下 -->
+      <div style="position:absolute; right:16px; bottom:-20px; display:flex; gap:10px;">
+        ${s.sns1 ? `
+        <a href="${s.sns1}" target="_blank" rel="noopener noreferrer"
+          class="sns-btn" style="width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#000000;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5">
+            <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/>
+          </svg>
+        </a>` : ''}
+        ${s.sns2 ? `
+        <a href="${s.sns2}" target="_blank" rel="noopener noreferrer"
+          class="sns-btn" style="width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#FEDA75,#FA7E1E,#D62976,#962FBF,#4F5BD5);">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5"/>
+            <circle cx="12" cy="12" r="5"/>
+            <circle cx="17.5" cy="6.5" r="1.5" fill="#fff" stroke="none"/>
+          </svg>
+        </a>` : ''}
+        ${s.sns3 ? `
+        <a href="${s.sns3}" target="_blank" rel="noopener noreferrer"
+          class="sns-btn" style="width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#FF0000,#CC0000);">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff">
+            <path d="M23.5 6.2a2.9 2.9 0 0 0-2-2C19.8 3.7 12 3.7 12 3.7s-7.8 0-9.5.5a2.9 2.9 0 0 0-2 2A30 30 0 0 0 0 12a30 30 0 0 0 .5 5.8 2.9 2.9 0 0 0 2 2c1.7.5 9.5.5 9.5.5s7.8 0 9.5-.5a2.9 2.9 0 0 0 2-2A30 30 0 0 0 24 12a30 30 0 0 0-.5-5.8zM9.8 15.5V8.5l6.4 3.5-6.4 3.5z"/>
+          </svg>
+        </a>` : ''}
+      </div>
 
-   
+      <!-- アイコン — ヘッダー左下に重ねる -->
+      <img src="${s.iconImage}"
+        style="width:90px;height:90px;object-fit:cover;border-radius:50%;border:4px solid #fff;position:absolute;left:16px;bottom:-40px;">
+    </div>
 
- <div style="
-  position: absolute;
-  right: 16px;
-  bottom: -45px;
-  display: flex;
-  gap: 12px;
-">
- ${s.sns1 ? `
-  <a href="${s.sns1}" target="_blank" rel="noopener noreferrer"
-    class="sns-btn w-10 h-10 rounded-full flex items-center justify-center"
-    style="
-      background: #000000;
-    ">
-    <!-- TikTok -->
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
-      stroke="#FFFFFF" stroke-width="3">
-      <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/>
-    </svg>
-  </a>
-  ` : ''}
-
-
-  ${s.sns2 ? `
-  <a href="${s.sns2}" target="_blank" rel="noopener noreferrer"
-    class="sns-btn w-10 h-10 rounded-full flex items-center justify-center"
-    style="
-      background: linear-gradient(135deg, #FEDA75, #FA7E1E, #D62976, #962FBF, #4F5BD5);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.25);
-    ">
-    <!-- Instagram -->
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
-      stroke="#FFFFFF" stroke-width="1.8"
-      stroke-linecap="round" stroke-linejoin="round">
-      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-      <circle cx="12" cy="12" r="5"/>
-      <circle cx="17.5" cy="6.5" r="1.5" fill="#FFFFFF" stroke="none"/>
-    </svg>
-  </a>
-  ` : ''}
-
-  ${s.sns3 ? `
-  <a href="${s.sns3}" target="_blank" rel="noopener noreferrer"
-    class="sns-btn w-10 h-10 rounded-full flex items-center justify-center"
-    style="
-      background: linear-gradient(135deg, #FF0000, #CC0000);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.25);
-    ">
-    <!-- YouTube -->
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="#FFFFFF">
-      <path d="M23.5 6.2a2.9 2.9 0 0 0-2-2C19.8 3.7 12 3.7 12 3.7s-7.8 0-9.5.5a2.9 2.9 0 0 0-2 2A30 30 0 0 0 0 12a30 30 0 0 0 .5 5.8 2.9 2.9 0 0 0 2 2c1.7.5 9.5.5 9.5.5s7.8 0 9.5-.5a2.9 2.9 0 0 0 2-2A30 30 0 0 0 24 12a30 30 0 0 0-.5-5.8zM9.8 15.5V8.5l6.4 3.5-6.4 3.5z"/>
-    </svg>
-  </a>
-  ` : ''}
-
-</div>
-
-
-
-<img src="${s.iconImage}"
-     style="
-       width:100px;
-       height:100px;
-       object-fit:cover;
-       border-radius:50%;
-       border:4px solid #fff;
-       position:absolute;
-       left:20px;
-       bottom:-45px;
-     ">
-
-
-  </div>
-
-   <!-- modal内のInfo -->
-<div class="px-5 pb-6" style="padding-top:60px;">
-
-<!-- Name -->
-<h2 class="font-display font-700 text-xl tracking-wider"
-    style="color:#0F0646; margin-top:14px;">
-  ${s.name}
-</h2>
-
-<!-- Area -->
-<p style="color:#9797A0; font-size:13px; margin-top:4px;">
-  📍 ${s.area}
-</p>
-
-<!-- Genre -->
-<div style="display:flex; flex-wrap:wrap; gap:6px; margin-top:10px;">
-  ${s.genre.map(g => `
-    <span style="
-      font-size:11px;
-      padding:4px 10px;
-      border-radius:999px;
-      background:#7577A3;
-      color:#fff;
-    ">
-      ${g}
-    </span>
-  `).join('')}
-</div>
-
-
-<!-- bio -->
-<p style="
-  margin-top:14px;
-  font-size:14px;
-  line-height:1.6;
-  color:#4B4B63;
-">
-  ${s.bio.replace(/\n/g, "<br>")}
-</p>
-
-
-
-<!-- Main Image -->
-<div style="
-  margin-top:20px;
-  aspect-ratio:1/1;
-  overflow:hidden;
-  border-radius:16px;
-">
-  <img src="${s.mainImage}"
-       style="
-         width:100%;
-         height:100%;
-         object-fit:cover;
-         display:block;
-       ">
-</div>
-
-
+    <!-- テキスト情報 -->
+    <div style="padding: 52px 20px 24px;">
+      <h2 style="font-family:Outfit,sans-serif;font-weight:700;font-size:20px;color:#0F0646;margin:0;">${s.name}</h2>
+      <p style="color:#9797A0;font-size:13px;margin:4px 0 0;">📍 ${s.area}</p>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;">
+        ${s.genre.map(g => `<span style="font-size:11px;padding:4px 10px;border-radius:999px;background:#7577A3;color:#fff;">${g}</span>`).join('')}
+      </div>
+      <p style="margin-top:14px;font-size:14px;line-height:1.7;color:#4B4B63;">${s.bio.replace(/\n/g,'<br>')}</p>
+      <div style="margin-top:20px;aspect-ratio:1/1;overflow:hidden;border-radius:16px;">
+        <img src="${s.mainImage}" style="width:100%;height:100%;object-fit:cover;display:block;">
+      </div>
+    </div>
   `;
 
   overlay.classList.remove('hidden');
   content.classList.add('animate-modal');
   overlay.classList.add('animate-backdrop');
+  document.body.style.overflow = 'hidden';
 }
 
-function closeModal(event) {
-  if (event && event.target !== document.getElementById('modalOverlay')) return;
+function closeModalDirect() {
   const overlay = document.getElementById('modalOverlay');
   overlay.classList.add('hidden');
   overlay.classList.remove('animate-backdrop');
   document.getElementById('modalContent').classList.remove('animate-modal');
-}
-// Also close on direct call without event (the X button)
-document.getElementById('modalOverlay').addEventListener('click', function(e) {
-  if (e.target === this) {
-    this.classList.add('hidden');
-    this.classList.remove('animate-backdrop');
-    document.getElementById('modalContent').classList.remove('animate-modal');
-  }
-});
-
-// ----- ELEMENT SDK -----
-const defaultConfig = {
-  site_title: "GENDERLESS HAIR BOOK",
-  site_subtitle: "ジェンダーレスヘア美容師図鑑",
-  background_color: "#1a1714",
-  surface_color: "#252119",
-  text_color: "#e0d5c1",
-  accent_color: "#c4a87a",
-  muted_color: "#a89a87",
-  font_family: "Zen Kaku Gothic New",
-  font_size: 14
-};
-
-function applyConfig(config) {
-  const title = document.getElementById('siteTitle');
-  const subtitle = document.getElementById('siteSubtitle');
-  if (title) title.textContent = config.site_title || defaultConfig.site_title;
-  if (subtitle) subtitle.textContent = config.site_subtitle || defaultConfig.site_subtitle;
-
-  const app = document.getElementById('app');
-  if (app) {
-    app.style.background = config.background_color || defaultConfig.background_color;
-    app.style.color = config.text_color || defaultConfig.text_color;
-    const ff = config.font_family || defaultConfig.font_family;
-    app.style.fontFamily = `${ff}, sans-serif`;
-  }
-
-  const baseSize = config.font_size || defaultConfig.font_size;
-  if (title) title.style.fontSize = `${baseSize * 2}px`;
-  if (subtitle) subtitle.style.fontSize = `${baseSize * 0.93}px`;
+  document.body.style.overflow = '';
 }
 
-if (window.elementSdk) {
-  window.elementSdk.init({
-    defaultConfig,
-    onConfigChange: async (config) => {
-      applyConfig(config);
-    },
-    mapToCapabilities: (config) => ({
-      recolorables: [
-        { get: () => config.background_color || defaultConfig.background_color, set: (v) => { config.background_color = v; window.elementSdk.setConfig({ background_color: v }); } },
-        { get: () => config.surface_color || defaultConfig.surface_color, set: (v) => { config.surface_color = v; window.elementSdk.setConfig({ surface_color: v }); } },
-        { get: () => config.text_color || defaultConfig.text_color, set: (v) => { config.text_color = v; window.elementSdk.setConfig({ text_color: v }); } },
-        { get: () => config.accent_color || defaultConfig.accent_color, set: (v) => { config.accent_color = v; window.elementSdk.setConfig({ accent_color: v }); } },
-        { get: () => config.muted_color || defaultConfig.muted_color, set: (v) => { config.muted_color = v; window.elementSdk.setConfig({ muted_color: v }); } }
-      ],
-      borderables: [],
-      fontEditable: {
-        get: () => config.font_family || defaultConfig.font_family,
-        set: (v) => { config.font_family = v; window.elementSdk.setConfig({ font_family: v }); }
-      },
-      fontSizeable: {
-        get: () => config.font_size || defaultConfig.font_size,
-        set: (v) => { config.font_size = v; window.elementSdk.setConfig({ font_size: v }); }
-      }
-    }),
-    mapToEditPanelValues: (config) => new Map([
-      ["site_title", config.site_title || defaultConfig.site_title],
-      ["site_subtitle", config.site_subtitle || defaultConfig.site_subtitle]
-    ])
-  });
+function handleOverlayClick(e) {
+  if (e.target === document.getElementById('modalOverlay')) {
+    closeModalDirect();
+  }
 }
 
 // ----- BOOT -----
 initAreaGrid();
 renderAll();
 </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ce358afe0c6ded5',t:'MTc3MTE0MzIxMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</body>
 </html>
